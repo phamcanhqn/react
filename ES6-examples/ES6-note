@@ -1,0 +1,17 @@
+- Inside an function a new function with new arrow syntax don't create new scope(this)
+- Arrow use same this as surrounding code
+- Strict mode rules is bypass this if this is lexical
+- this is ignored with arrow function when using call() or apply()
+- Arrow function don't bind an argument object
+- Arrow function don't bind own this
+- Arrow function can not used ad constructor and it' don't have protopye
+- Must wrap a parentheses for object return if you are using arrow function
+- class declarations are not hoisted
+- constructor method is a special method use for intitializing and creating an object with a class.
+- only have an contructor method in class, not more than
+- user the supper keyword to call contructor of parent class
+- use static to define a static method for a class. We can call a static method without instantiating and can not call through a class instance
+- value of this is undefine if we call a static or prototype without object valued "this"
+- Use extend keyword to create a class as child of another class
+- if sub-class have a constructor, we must call super() to using this
+- use super to call method of parent class

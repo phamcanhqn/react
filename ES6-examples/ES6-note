@@ -15,3 +15,37 @@
 - Use extend keyword to create a class as child of another class
 - if sub-class have a constructor, we must call super() to using this
 - use super to call method of parent class
+//======== 25/07/2017 ===============
+- Object literals
+  + ES6 support template literals
+  + We can use string literal or numberic for the name of a property or nest an object inside another
+  + We can break line a string with backslash
+- Destructuring assignment
+  + Destructuring assignment syntax isa a JS expression
+  + It possible to unpack values from arrays, properties form object, into distinct variables
+  + We can assign value for variable via destructring
+  + we can assigned a default value if value unpacked from array is undefined
+  + we can use unpacking fields from object passed as function parameter
+  + we can computed object property names and destructring
+  + Rest syntax help we can get remaining properties which we not already picked off by the destructuring pattern
+- for...of
+  + It create a loop iterating over Array, Map, String, Set, Object...)
+- Modules
+  + ES6 support for modules for component definition
+  + No code executes until requested modules are availible and processed
+- Module Loader
+  + A module loader runs at runtime
+  + We only load module when need
+  =================
+- Subclass create to inherit properties
+  + From another class
+  + Class-like function from existing inheritance framework
+  + A normal function
+  + Variable contains a function or class
+  + property access on an object
+  + A call function
+- Use super keyword to look properties of parent class
+- Subclassing Builtins in ES6
+  + We can create versioned from class builtin JS (Array, Date..)
+  + We can use all method of class builtin JS
+  + We can create own properties and methods

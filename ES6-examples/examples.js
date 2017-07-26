@@ -121,3 +121,34 @@ class Dog extends Animal {
 
 var dog = new Dog('Mitzie');
 dog.speak(); // Mitzie barks.
+
+
+var people = [
+  {
+    name: 'Mike Smith',
+    family: {
+      mother: 'Jane Smith',
+      father: 'Harry Smith',
+      sister: 'Samantha Smith'
+    },
+    age: 35
+  },
+  {
+    name: 'Tom Jones',
+    family: {
+      mother: 'Norah Jones',
+      father: 'Richard Jones',
+      brother: 'Howard Jones'
+    },
+    age: 25
+  }
+];
+
+for (var {name: n, family: {father: f}} of people) {
+  console.log('Name: ' + n + ', Father: ' + f);
+}
+
+let {a, b, ...rest} = {a: 10, b: 20, c: 30, d: 40, e: 99}
+a;
+b;
+rest;

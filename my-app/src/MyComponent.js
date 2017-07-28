@@ -1,13 +1,30 @@
 import React, { Component } from 'react';
+import './MyComponent.css';
 
 class MyComponent extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {isToggleOn: true};
+
+		this.handleLinkClick = this.handleLinkClick.bind(this);
+	}
+
 	formatDate(date) {
   	return date.toLocaleDateString();
   }
 
+  handleLinkClick(event) {
+  	event.preventDefault();
+
+  	this.setState(prevState =>({
+  		isToggleOn: !prevState.isToggleOn
+  	}));
+  }
+
 	render() {
 		return (
-			<div className="Comment">
+			<div className={"Comment " + (this.state.isToggleOn ? '' : 'collapse')}>
+				<a href="#" onClick={this.handleLinkClick}>{this.state.isToggleOn ? 'Collapse' : 'Expand'}</a>
 	      <div className="UserInfo">
 	        <img className="Avatar"
 	          src={this.props.author.avatarUrl}
@@ -23,6 +40,7 @@ class MyComponent extends Component {
 	      <div className="Comment-date">
 	        {this.formatDate(this.props.date)}
 	      </div>
+
 	    </div>
     );
 	}

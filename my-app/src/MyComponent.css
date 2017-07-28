@@ -1,0 +1,5 @@
+.collapse .UserInfo,
+.collapse .Comment-text,
+.collapse .Comment-date {
+	display: none;
+}

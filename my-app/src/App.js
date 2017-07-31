@@ -7,6 +7,8 @@ import LoginControl from './Conditional';
 import Mailbox from './Mailbox';
 import Page from './Page';
 import NumberList from './NumberList';
+import NameForm from './NameForm';
+import Reservation from './Reservation';
 
 class App extends Component {
   getName () {return 'canh pham'}
@@ -45,6 +47,8 @@ class App extends Component {
          <Mailbox unreadMessage={messages} />
          <Page />
          <NumberList />
+         <NameForm />
+         <Reservation />
       </div>
     );
   }

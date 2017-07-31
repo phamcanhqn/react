@@ -1,0 +1,9 @@
+form {
+	padding: 30px;
+	width: 500px;
+	margin: 0 auto;
+}
+
+label, span {
+	display: block;
+}

@@ -23,25 +23,3 @@
   to { transform: rotate(360deg); }
 }
 
-/* Practice 1 style*/
-
-.wrapper-content {
-  width: 400px;
-  margin: 40px auto;
-}
-
-.legend-title,
-.button button {
-  font-weight: 700;
-  font-size: 20px;
-}
-
-.button button {
-  padding: 10px 20px;
-  margin: 10px;
-}
-
-.number-result {
-  font-size: 50px;
-  font-weight: 800;
-}

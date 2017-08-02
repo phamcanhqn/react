@@ -21,9 +21,13 @@ cd react-practice-1
 
 git clone git@gitlab.asoft-python.com:g-canhpham/react-training.git
 
+git checkout -b feature/practice-1
+
+git pull origin feature/practice-1
+
 cd practice-1
 
-git pull orgin feature/practice-1
+npm install
 
 npm start
 

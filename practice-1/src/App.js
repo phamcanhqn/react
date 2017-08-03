@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import IncrementDecrementForm from './components/IncrementDecrementForm';
+import IncrementDecrementForm from './components/IncrementDecrement/IncrementDecrementForm';
 
 class App extends Component {
   render() {

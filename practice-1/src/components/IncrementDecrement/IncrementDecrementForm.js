@@ -1,20 +1,9 @@
 import React, {Component} from 'react';
+
+import IncrementDecrementButton from './IncrementDecrementButton';
+import NumberResult from './NumberResult';
+
 import './IncrementDecrementForm.css';
-
-function IncrementDecrementButton(props) {
-  return (
-    <div className='button'>
-      <button onClick={props.handleDecrementClick}> &#45; </button>
-      <button onClick={props.handleIncrementClick}> &#43; </button>
-    </div>
-  );
-}
-
-function NumberResult(props) {
-  return (
-    <span className='number-result'>{props.numberResult}</span>
-  );
-}
 
 class IncrementDecrementForm extends Component {
   constructor(props) {
@@ -23,9 +12,20 @@ class IncrementDecrementForm extends Component {
     this.state = {result: 0};
   }
 
-  handleIncrementButtonClick = () => this.setState(preState => ({result: preState.result + 1}))
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextState.result < 0) {
 
-  handleDecrementButtonClick = () => this.setState(preState => ({result: preState.result - 1}))
+      //this.setState({result: 0});
+
+      return false;
+    }
+
+    return true;
+  }
+
+  handleIncrementButtonClick = () => this.setState(preState => ({result: ++preState.result}))
+
+  handleDecrementButtonClick = () => this.setState(preState => ({result: --preState.result}))
 
   render() {
     return (

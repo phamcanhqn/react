@@ -5,6 +5,8 @@ import ListOfTenThings from './ListOfTenThings';
 import Greeting from './Greeting';
 import SingleElement from './SingleElement';
 import CustomTextInput from './CustomTextInput';
+import CounterButton from './CounterButton'
+import WordAdder from './WordAdder';
 
 class App extends Component {
   render() {
@@ -21,6 +23,8 @@ class App extends Component {
           <span>Canh Pham</span>
         </SingleElement>
         <CustomTextInput />
+        <CounterButton />
+        <WordAdder />
       </div>
     );
   }

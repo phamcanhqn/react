@@ -13,14 +13,7 @@ class IncrementDecrementForm extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (nextState.result < 0) {
-
-      //this.setState({result: 0});
-
-      return false;
-    }
-
-    return true;
+    return !(nextState.result < 0);
   }
 
   handleIncrementButtonClick = () => this.setState(preState => ({result: ++preState.result}))

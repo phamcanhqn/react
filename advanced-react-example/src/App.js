@@ -7,6 +7,8 @@ import SingleElement from './SingleElement';
 import CustomTextInput from './CustomTextInput';
 import CounterButton from './CounterButton'
 import WordAdder from './WordAdder';
+import MessageList from './MessageList';
+import MediaQuery from './MediaQuery'
 
 class App extends Component {
   render() {
@@ -25,6 +27,8 @@ class App extends Component {
         <CustomTextInput />
         <CounterButton />
         <WordAdder />
+        <MessageList messages={['canh','hang', 'huy']} />
+        <MediaQuery />
       </div>
     );
   }

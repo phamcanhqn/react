@@ -8,7 +8,8 @@ import CustomTextInput from './CustomTextInput';
 import CounterButton from './CounterButton'
 import WordAdder from './WordAdder';
 import MessageList from './MessageList';
-import MediaQuery from './MediaQuery'
+import MediaQuery from './MediaQuery';
+import ListChosen from './ListChosen'
 
 class App extends Component {
   render() {
@@ -29,6 +30,7 @@ class App extends Component {
         <WordAdder />
         <MessageList messages={['canh','hang', 'huy']} />
         <MediaQuery />
+        <ListChosen />
       </div>
     );
   }

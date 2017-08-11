@@ -1,0 +1,7 @@
+.header-title {
+	display: flex;
+}
+
+.asc-sort:before {
+	/*content: '&#x25B2';*/
+}

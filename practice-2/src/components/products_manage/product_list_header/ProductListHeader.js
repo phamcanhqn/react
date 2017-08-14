@@ -13,11 +13,13 @@ class ProductListHeader extends React.Component {
 	}
 
 	handleSortClick = (event) => {
-		this.props.handleSortClick(event.target);
+    const sortBy = event.target.getAttribute('name');
+		this.props.handleSortClick(event.target, sortBy);
 	}
 
-	handleFiller = (event) => {
-		this.props.handleFiller(event.target);
+	handleFillter = (event) => {
+    const fillterBy = event.target.getAttribute('name');
+		this.props.handleFiller(event.target, fillterBy);
 	}
 
 	render() {
@@ -25,76 +27,83 @@ class ProductListHeader extends React.Component {
 			<thead>
 				<tr>
 					<th>
-						<span className="header-title" name="code" onClick={this.props.handleSortClick}>
+						<span className="header-title" name="code" onClick={this.handleSortClick}>
 							Code
-							<SortIcon className="sort-icon asc-sort" />
+							<SortIcon className="sort-icon" />
 						</span>
 						<Input
-							name="fillter-code"
+							name="code"
 							className="fillter-code"
-							handleChange={this.props.handleFiller}/>
+              value={this.props.codeValue}
+							handleChange={this.handleFillter}/>
 					</th>
 					<th>
-						<span className="header-title" name="name" onClick={this.props.handleSortClick}>
+						<span className="header-title" name="name" onClick={this.handleSortClick}>
 							Name
 							<SortIcon className="sort-icon" />
 						</span>
 						<Input
-							name="fillter-name"
+							name="name"
 							className="fillter-name"
-							handleChange={this.props.handleFiller}/>
+              value={this.props.nameValue}
+							handleChange={this.handleFillter}/>
 					</th>
 					<th>
-						<span className="header-title" name="manufacturer" onClick={this.props.handleSortClick}>
+						<span className="header-title" name="manufacturer" onClick={this.handleSortClick}>
 							Manufacturer
 							<SortIcon className="sort-icon" />
 						</span>
 						<DropdownSelect
-							name="fillter-manufacturer"
+							name="manufacturer"
 							className="fillter-manufacturer"
 							options={this.props.manufacturerOptions}
-							handleChange={this.props.handleFiller}/>
+              value={this.props.manufacturerValue}
+							handleChange={this.handleFillter}/>
 					</th>
 					<th>
-						<span className="header-title" name="description" onClick={this.props.handleSortClick}>
+						<span className="header-title" name="description" onClick={this.handleSortClick}>
 							Description
 							<SortIcon className="sort-icon" />
 						</span>
 						<Input
-							name="fillter-description"
+							name="description"
 							className="fillter-description"
-							handleChange={this.props.handleFiller}/>
+              value={this.props.descriptionValue}
+							handleChange={this.handleFillter}/>
 					</th>
 					<th>
-						<span className="header-title" name="category" onClick={this.props.handleSortClick}>
+						<span className="header-title" name="category" onClick={this.handleSortClick}>
 							Category
 							<SortIcon className="sort-icon" />
 						</span>
 						<DropdownSelect
-							name="fillter-category"
+							name="category"
 							className="fillter-category"
+              value={this.props.categoryValue}
 							options={this.props.categoryOptions}
-							handleChange={this.props.handleFiller}/>
+							handleChange={this.handleFillter}/>
 					</th>
 					<th>
-						<span className="header-title" name="price" onClick={this.props.handleSortClick}>
+						<span className="header-title" name="price" onClick={this.handleSortClick}>
 							Price
 							<SortIcon className="sort-icon" />
 						</span>
 						<Input
-							name="fillter-price"
+							name="price"
 							className="fillter-price"
-							handleChange={this.props.handleChangePrice}/>
+              value={this.props.priceValue}
+							handleChange={this.handleFillter}/>
 					</th>
 					<th>
-						<span className="header-title" name="quanity" onClick={this.props.handleSortClick}>
+						<span className="header-title" name="quanity" onClick={this.handleSortClick}>
 							Quanity
 							<SortIcon className="sort-icon" />
 						</span>
 						<Input
-							name="fillter-quanity"
-							className="fillter-quanity"
-							handleChange={this.props.handleFiller}/>
+							name="quantity"
+							className="fillter-quantity"
+              value={this.props.quanityValue}
+							handleChange={this.handleFillter}/>
 					</th>
 					<th>
 						<span>Action</span>

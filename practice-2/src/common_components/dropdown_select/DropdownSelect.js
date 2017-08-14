@@ -7,12 +7,16 @@ const DropdownSelect = props => {
         value={props.value}
         onChange={props.handleChange}
         className={props.className}>
+        <option
+          value="">
+          --Select--
+        </option>
         {
           props.options.map(option => {
             return (
               <option
                 value={option.value}
-                key={option.value}>
+                key={option.id}>
                 {option.label}
               </option>
             );

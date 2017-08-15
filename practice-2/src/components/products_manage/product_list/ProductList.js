@@ -5,12 +5,13 @@ import ProductListHeader from './../product_list_header/ProductListHeader';
 import ProductRow from './../product_row/ProductRow';
 import './style/ProductList.css';
 
-class ProductList extends React.Component {
+class ProductList extends React.PureComponent {
 	constructor(props) {
 		super(props);
 	}
 
 	render() {
+    console.log('vao list ne')
 		return (
       <tbody>
         {this.props.products.map((product) => {

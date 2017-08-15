@@ -4,4 +4,5 @@
 
 .products-table th,td {
 	border: 1px solid ;
+  padding: 10px;
 }

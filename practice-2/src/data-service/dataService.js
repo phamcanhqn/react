@@ -44,6 +44,49 @@ const CategoriesData = [
   }
 ];
 
+const HeaderColumns = [
+  {
+    name: 'code',
+    display: 'Code',
+    isAllowedSort: true
+  },
+  {
+    name: 'name',
+    display: 'Name',
+    isAllowedSort: true
+  },
+  {
+    name: 'manufacturer',
+    display: 'Manufacturer',
+    isAllowedSort: true
+  },
+  {
+    name: 'description',
+    display: 'Description',
+    isAllowedSort: true
+  },
+  {
+    name: 'category',
+    display: 'Category',
+    isAllowedSort: true
+  },
+  {
+    name: 'price',
+    display: 'Price',
+    isAllowedSort: true
+  },
+  {
+    name: 'quantity',
+    display: 'Quantity',
+    isAllowedSort: true
+  },
+  {
+    name: 'action',
+    display: 'Action',
+    isAllowedSort: false
+  }
+];
+
 const ProductListData = {
   data: [
     {
@@ -99,4 +142,14 @@ const ProductListData = {
   ]
 };
 
-export {ProductListData, ManufacturersData, CategoriesData};
+const DefaultProduct = {
+  id: new Date().valueOf(),
+  code: '',
+  name: '',
+  manufacturer: '',
+  description: '',
+  category: '',
+  price: null,
+  quantity: null
+}
+export {HeaderColumns, ProductListData, ManufacturersData, CategoriesData, DefaultProduct};

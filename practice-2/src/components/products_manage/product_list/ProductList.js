@@ -10,18 +10,31 @@ class ProductList extends React.PureComponent {
 		super(props);
 	}
 
+  handleEditAction = id => {
+    this.props.handleEditAction(id);
+  }
+
+  handleCancelAction = id => {
+    this.props.handleCancelAction(id);
+  }
+
 	render() {
     console.log('vao list ne')
 		return (
       <tbody>
         {this.props.products.map((product) => {
-            return (
-              <ProductRow
-                isEdit={this.props.isEdit}
-                key={product.id}
-                row={product}
-                manufacturerOptions={this.props.isEdit ? this.props.manufacturerOptions : []}
-                categoryOptions={this.props.isEdit ? this.props.categoryOptions : []} />
+          const mode = product.id === this.props.rowEditing ? 'edit' : 'view';
+
+          return (
+            <ProductRow
+              id={product.id}
+              mode={mode}
+              key={product.id}
+              row={product}
+              manufacturerOptions={this.props.isEdit ? this.props.manufacturerOptions : []}
+              categoryOptions={this.props.isEdit ? this.props.categoryOptions : []}
+              handleButtonEdit={this.handleEditAction}
+              handleButtonCancel={this.handleCancelAction} />
             );
           })
         }

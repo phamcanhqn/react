@@ -18,7 +18,8 @@ class ProductListManage extends React.Component {
       originalProducts:ProductListData.data,
       filterValue: {},
       sortBy:'',
-      sortType: ''
+      sortType: '',
+      rowEditing: null
     };
 	}
   //============== Handle Fillter ===============
@@ -83,6 +84,18 @@ class ProductListManage extends React.Component {
     }
   }
 
+  //============ Handle Edit Action =================
+  handleEditAction = (id) => {
+    this.setState({
+      rowEditing: id
+    });
+  }
+
+  handleCancelAction = (id) => {
+    this.setState({
+      rowEditing: null
+    });
+  }
 	render() {
     console.log('this.state', this.state)
 		return (
@@ -96,6 +109,11 @@ class ProductListManage extends React.Component {
           categoryOptions={CategoriesData}
           handleFilterClick={this.handleFillterAction}
           handleChangeFilterValue={this.handleChangeFilterValue} />
+        <Button
+          name="btn-add"
+          className="btn"
+          handleClick={this.handleAddProductAction}
+          label="Add product"/>
         <table className="products-table">
           <ProductListHeader
             handleSortClick={this.handleSortAction}
@@ -103,11 +121,13 @@ class ProductListManage extends React.Component {
             sortType={this.state.sortType}
             sortBy={this.state.sortBy} />
           <ProductList
+            rowEditing={this.state.rowEditing}
             handleSortAction={this.handleSortAction}
             manufacturerOptions={ManufacturersData}
             categoryOptions={CategoriesData}
-            isEdit={false}
-            products={this.state.products} />
+            products={this.state.products}
+            handleEditAction={this.handleEditAction}
+            handleCancelAction={this.handleCancelAction} />
         </table>
       </div>
 		);

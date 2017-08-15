@@ -12,18 +12,20 @@ class ProductRow extends React.Component {
     super(props);
   }
 
-  handleButtonEdit = event => {
-    alert("edit product");
+  handleButtonEdit = id => {
+    this.props.handleButtonEdit(id);
   }
 
-  handleButtonDelete = event => {
-    alert("delete product");
+  handleButtonDelete = id => {
+    alert("delete product"  + id);
+  }
+
+  handleButtonCancel = id => {
+    this.props.handleButtonCancel(id);
   }
 
   render() {
-    const isEdit = this.props.isEdit;
-
-    if (!isEdit) {
+    if (this.props.mode === 'view') {
       return (
         <tr>
           <td>{this.props.row.code}</td>
@@ -37,12 +39,12 @@ class ProductRow extends React.Component {
             <Button
               name="btn-edit"
               className="btn"
-              handleClick={this.handleButtonEdit}
+              handleClick={this.handleButtonEdit.bind(this, this.props.row.id)}
               label="Edit"/>
             <Button
               name="btn-delete"
               className="btn"
-              handleClick={this.handleButtonDelete}
+              handleClick={this.handleButtonDelete.bind(this, this.props.row.id)}
               label="Delete"/>
           </td>
         </tr>
@@ -98,12 +100,12 @@ class ProductRow extends React.Component {
             <Button
               name="btn-save"
               className="btn"
-              handleClick={this.handleButtonEdit}
+              handleClick={this.handleButtonSave}
               label="Save"/>
             <Button
               name="btn-cancel"
               className="btn"
-              handleClick={this.handleButtonDelete}
+              handleClick={this.handleButtonCancel.bind(this, this.props.row.id)}
               label="Cancel"/>
           </td>
         </tr>

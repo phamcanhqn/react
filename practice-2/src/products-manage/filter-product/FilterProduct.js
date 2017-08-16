@@ -22,6 +22,7 @@ class FilterProduct extends React.Component {
 
     this.props.handleChangeFilterValue(event.target.value, fillterBy);
   }
+
   render() {
     return (
       <form className="filter-form">

@@ -5,7 +5,7 @@ import ProductListHeader from './../product-list-header/ProductListHeader';
 import ProductRow from './../product-row/ProductRow';
 import './style/ProductList.css';
 
-class ProductList extends React.PureComponent {
+class ProductList extends React.Component {
 	constructor(props) {
 		super(props);
 	}
@@ -18,23 +18,39 @@ class ProductList extends React.PureComponent {
     this.props.handleCancelAction(id);
   }
 
+  handleDeleteAction = id => {
+    this.props.handleDeleteAction(id);
+  }
+
+  handleChangeValueAction = (value, fieldName) => {
+    this.props.handleChangeValueAction(value, fieldName);
+  }
+
+  handleSaveAction = id => {
+    this.props.handleSaveAction(id);
+  }
+
 	render() {
-    console.log('vao list')
+    const productEditing = this.props.productEditing;
+
 		return (
       <tbody>
         {this.props.products.map((product) => {
-          const mode = product.id === this.props.rowEditing ? 'edit' : 'view';
+          const isEditMode = product.id === this.props.rowEditing;
 
           return (
             <ProductRow
               id={product.id}
-              mode={mode}
+              isEditMode={isEditMode}
               key={product.id}
-              row={product}
-              manufacturerOptions={mode === "edit" ? this.props.manufacturerOptions : []}
-              categoryOptions={mode === "edit"  ? this.props.categoryOptions : []}
+              product={isEditMode ? productEditing : product}
+              manufacturerOptions={isEditMode ? this.props.manufacturerOptions : []}
+              categoryOptions={isEditMode  ? this.props.categoryOptions : []}
               handleButtonEdit={this.handleEditAction}
-              handleButtonCancel={this.handleCancelAction} />
+              handleButtonSave={this.handleSaveAction}
+              handleButtonCancel={this.handleCancelAction}
+              handleButtonDelete={this.handleDeleteAction}
+              handleChangeValue={this.handleChangeValueAction} />
             );
           })
         }

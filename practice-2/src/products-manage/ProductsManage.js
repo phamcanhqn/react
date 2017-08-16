@@ -6,7 +6,7 @@ import {Button} from './../commons/button/Button';
 import FilterProduct from './filter-product/FilterProduct';
 import ProductListHeader from './product-list-header/ProductListHeader';
 import ProductList from './product-list/ProductList';
-import {HeaderColumns, ProductListData, ManufacturersData, CategoriesData} from './../constants/DataObjects';
+import {HeaderColumns, ProductListData, ManufacturersData, CategoriesData, DefaultProduct} from './../constants/DataObjects';
 
 import './style/ProductListManage.css';
 
@@ -20,7 +20,8 @@ class ProductsManage extends React.Component {
       filterValue: {},
       sortBy:'',
       sortType: '',
-      rowEditing: null
+      rowEditing: null,
+      productEditing: {}
     };
 	}
 
@@ -88,14 +89,80 @@ class ProductsManage extends React.Component {
 
   //============ Handle Edit Action =================
   handleEditAction = (id) => {
-    this.setState({
-      rowEditing: id
+    this.setState(preState => {
+      const productEditing = this.findProductById(id, preState.products);
+
+      return {
+        rowEditing: id,
+        productEditing
+      }
     });
   }
 
-  handleCancelAction = (id) => {
+  handleCancelAction = id => {
     this.setState({
-      rowEditing: null
+      rowEditing: null,
+      productEditing: {}
+    });
+  }
+
+  //=========== Handle Change Value ==========
+  handleChangeValueAction = (value, fieldName) => {
+    this.setState(preState => {
+      let productEditing = preState.productEditing;
+      productEditing[fieldName] = value;
+
+      return {
+        productEditing
+      }
+    });
+  }
+
+  //======== Handle save ============
+  handleSaveAction = id => {
+    const productEditing = this.state.productEditing;
+
+    const index = _.findIndex(this.state.products, productEditing);
+
+    this.setState(preState => {
+      preState.products.splice(index, 1, productEditing);
+
+      return {
+        products: preState.products,
+        productEditing: {},
+        rowEditing: null
+      }
+    });
+  }
+
+  //========== Handle add new product========
+  handleAddProductAction = () => {
+    this.setState(preState => {
+      preState.products.push(DefaultProduct);
+      return {
+        products: preState.products,
+        rowEditing: DefaultProduct.id,
+        productEditing: DefaultProduct
+      }
+    });
+  }
+
+  //==== Handle delete product ============
+  handleDeleteAction = id => {
+    this.setState(preState => {
+      products: this.removeProduct(id, preState.products)
+    });
+  }
+
+  removeProduct = (id, productList) => {
+    _.remove(productList, function(product) {
+      return product.id === id;
+    });
+  }
+
+  findProductById = (id, productList) => {
+    return _.find(productList, function(product) {
+      return product.id === id;
     });
   }
 	render() {
@@ -128,8 +195,12 @@ class ProductsManage extends React.Component {
             manufacturerOptions={ManufacturersData}
             categoryOptions={CategoriesData}
             products={this.state.products}
+            productEditing={this.state.productEditing}
+            handleChangeValueAction={this.handleChangeValueAction}
             handleEditAction={this.handleEditAction}
-            handleCancelAction={this.handleCancelAction} />
+            handleSaveAction={this.handleSaveAction}
+            handleCancelAction={this.handleCancelAction}
+            handleDeleteAction={this.handleDeleteAction} />
         </table>
       </div>
 		);

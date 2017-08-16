@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ProductListHeader from './../product_list_header/ProductListHeader';
-import ProductRow from './../product_row/ProductRow';
+import ProductListHeader from './../product-list-header/ProductListHeader';
+import ProductRow from './../product-row/ProductRow';
 import './style/ProductList.css';
 
 class ProductList extends React.PureComponent {
@@ -19,7 +19,7 @@ class ProductList extends React.PureComponent {
   }
 
 	render() {
-    console.log('vao list ne')
+    console.log('vao list')
 		return (
       <tbody>
         {this.props.products.map((product) => {
@@ -31,8 +31,8 @@ class ProductList extends React.PureComponent {
               mode={mode}
               key={product.id}
               row={product}
-              manufacturerOptions={this.props.isEdit ? this.props.manufacturerOptions : []}
-              categoryOptions={this.props.isEdit ? this.props.categoryOptions : []}
+              manufacturerOptions={mode === "edit" ? this.props.manufacturerOptions : []}
+              categoryOptions={mode === "edit"  ? this.props.categoryOptions : []}
               handleButtonEdit={this.handleEditAction}
               handleButtonCancel={this.handleCancelAction} />
             );

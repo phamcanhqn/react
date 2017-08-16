@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {SortIcon} from './../../../common_components/sort_icon/SortIcon';
-import {Input} from './../../../common_components/input/Input';
-import {DropdownSelect} from './../../../common_components/dropdown_select/DropdownSelect';
+import {SortIcon} from './../../commons/sort-icon/SortIcon';
+import {Input} from './../../commons/input/Input';
+import {DropdownSelect} from './../../commons/dropdown-select/DropdownSelect';
 
 import './style/ProductListHeader.css';
 

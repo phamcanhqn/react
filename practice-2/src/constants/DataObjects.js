@@ -1,4 +1,4 @@
-const ManufacturersData = [
+  const ManufacturersData = [
   {
     id: 1,
     value: 'apple',

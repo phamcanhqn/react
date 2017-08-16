@@ -2,14 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 
-import {Button} from './../../common_components/button/Button';
-import FilterProduct from './filter_product/FilterProduct';
-import ProductListHeader from './product_list_header/ProductListHeader';
-import ProductList from './product_list/ProductList';
-import {HeaderColumns, ProductListData, ManufacturersData, CategoriesData} from './../../data-service/dataService';
+import {Button} from './../commons/button/Button';
+import FilterProduct from './filter-product/FilterProduct';
+import ProductListHeader from './product-list-header/ProductListHeader';
+import ProductList from './product-list/ProductList';
+import {HeaderColumns, ProductListData, ManufacturersData, CategoriesData} from './../constants/DataObjects';
+
 import './style/ProductListManage.css';
 
-class ProductListManage extends React.Component {
+class ProductsManage extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -22,6 +23,7 @@ class ProductListManage extends React.Component {
       rowEditing: null
     };
 	}
+
   //============== Handle Fillter ===============
   handleFillterAction = (event) => {
     const filterValue = this.state.filterValue;
@@ -55,7 +57,7 @@ class ProductListManage extends React.Component {
 
     this.setState({
       sortType,
-      sortBy
+      sortBy: sortType ? sortBy : ''
     });
 
     this.sortProductList(sortBy, sortType);
@@ -134,4 +136,4 @@ class ProductListManage extends React.Component {
 	}
 }
 
-export default ProductListManage;
+export default ProductsManage;

@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {Input} from './../../../common_components/input/Input';
-import {Button} from './../../../common_components/button/Button';
-import {DropdownSelect} from './../../../common_components/dropdown_select/DropdownSelect';
+import {Input} from './../../commons/input/Input';
+import {Button} from './../../commons/button/Button';
+import {DropdownSelect} from './../../commons/dropdown-select/DropdownSelect';
 
 import './style/ProductRow.css';
 
-class ProductRow extends React.Component {
+class ProductRow extends React.PureComponent {
   constructor(props) {
     super(props);
   }
@@ -25,6 +25,7 @@ class ProductRow extends React.Component {
   }
 
   render() {
+    console.log('vao row')
     if (this.props.mode === 'view') {
       return (
         <tr>

@@ -141,12 +141,9 @@ class ProductsManage extends React.Component {
   //==== Handle delete product ============
   handleDeleteAction = id => {
     this.setState(preState => {
-      const products =ProductHelpers.removeProduct(id, preState.products);
-
+      ProductHelpers.removeProduct(id, preState.products);
       return {
-        products,
-        sortBy:'',
-        sortType: ''
+        products: preState.products
       }
     });
   }
@@ -169,9 +166,9 @@ class ProductsManage extends React.Component {
           handleChangeFilterValue={this.handleChangeFilterValue} />
         <Button
           name="btn-add"
-          className="btn"
+          className="btn-add"
           handleClick={this.handleAddProductAction}
-          label="Add product"/>
+          label="Add" />
         <table className="products-table">
           <ProductListHeader
             handleSortClick={this.handleSortAction}

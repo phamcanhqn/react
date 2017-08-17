@@ -18,7 +18,9 @@ class ProductListHeader extends React.PureComponent {
           {
             this.props.headerColumns.map((col) => {
               return (
-                <th key={col.name}>
+                <th
+                  key={col.name}
+                  className={col.name + "-column"}>
                   <span className="header-title" name={col.name} onClick={col.isAllowedSort ? this.handleSortClick : null}>
                     {col.display}
                     <SortIcon className={`sort-icon ${this.props.sortBy === col.name ? this.props.sortType : ""}`} />

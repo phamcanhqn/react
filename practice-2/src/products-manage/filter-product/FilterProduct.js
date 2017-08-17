@@ -32,7 +32,10 @@ class FilterProduct extends React.Component {
   render() {
     return (
       <form className="filter-form" ref={this.props.formRef}>
+        <div className="filter-value">
         { this.props.filterColumns.map((col) => {
+          if (col.name === 'action') return null;
+
           let element;
 
             switch (col.elementType){
@@ -67,17 +70,19 @@ class FilterProduct extends React.Component {
             );
           })
         }
-
-        <Button
-          name="btn-filter"
-          className="btn"
-          handleClick={this.handleFilterAction}
-          label="Filter"/>
-        <Button
-          name="btn-clear"
-          className="btn"
-          handleClick={this.handleClearAction}
-          label="Clear filter"/>
+        </div>
+        <div className="filter-button">
+          <Button
+            name="btn-filter"
+            className="btn"
+            handleClick={this.handleFilterAction}
+            label="Filter"/>
+          <Button
+            name="btn-clear"
+            className="btn"
+            handleClick={this.handleClearAction}
+            label="Clear"/>
+        </div>
       </form>
     );
   }

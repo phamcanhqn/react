@@ -1,8 +1,14 @@
 .products-manage {
   margin: 10px auto;
+  width: 1200px;
 }
 
 .products-table {
   margin: 0 auto;
-  width: 1000px;
+  width: 100%;
+}
+
+.btn-add {
+  float: right;
+  margin: 10px 0;
 }

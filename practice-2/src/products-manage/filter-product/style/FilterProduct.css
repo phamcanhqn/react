@@ -1,8 +1,22 @@
 .filter-form {
   padding: 20px 0;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.filter-value {
   display: flex;
 }
 
+.filter-button {
+  text-align: right;
+  margin: 20px 0;
+}
+
+.filter-button button {
+  margin-left: 20px;
+}
+
 .filter-form label {
-  display: flex;
+  text-align: left;
 }

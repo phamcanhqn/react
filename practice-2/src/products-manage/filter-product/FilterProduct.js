@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {Input} from './../../../common_components/input/Input';
-import {DropdownSelect} from './../../../common_components/dropdown_select/DropdownSelect';
-import {Button} from './../../../common_components/button/Button';
+import {Input} from './../../commons/input/Input';
+import {DropdownSelect} from './../../commons/dropdown-select/DropdownSelect';
+import {Button} from './../../commons/button/Button';
 
 import './style/FilterProduct.css';
 
@@ -22,6 +22,7 @@ class FilterProduct extends React.Component {
 
     this.props.handleChangeFilterValue(event.target.value, fillterBy);
   }
+
   render() {
     return (
       <form className="filter-form">

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import ProductListManage from './components/products_manage/ProductListManage'
+import ProductListManage from './products-manage/ProductsManage'
 
 class App extends Component {
   render() {

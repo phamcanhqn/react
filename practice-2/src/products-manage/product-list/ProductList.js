@@ -36,7 +36,7 @@ class ProductList extends React.Component {
 		return (
       <tbody>
         {this.props.products.map((product) => {
-          const isEditMode = product.id === this.props.rowEditing;
+          const isEditMode = product.id === this.props.productEditing.id;
 
           return (
             <ProductRow

@@ -5,6 +5,7 @@ const DropdownSelect = props => {
   return (
       <select
         value={props.value}
+        name={props.name}
         onChange={props.handleChange}
         className={props.className}>
         <option
@@ -16,7 +17,8 @@ const DropdownSelect = props => {
             return (
               <option
                 value={option.value}
-                key={option.id}>
+                key={option.id}
+                selected={props.value === option.value}>
                 {option.label}
               </option>
             );

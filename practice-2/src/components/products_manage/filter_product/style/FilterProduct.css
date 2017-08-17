@@ -1,0 +1,8 @@
+.filter-form {
+  padding: 20px 0;
+  display: flex;
+}
+
+.filter-form label {
+  display: flex;
+}

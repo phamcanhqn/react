@@ -8,17 +8,13 @@ const DropdownSelect = props => {
         name={props.name}
         onChange={props.handleChange}
         className={props.className}>
-        <option
-          value="">
-          --Select--
-        </option>
+        <option value=""> --Select-- </option>
         {
           props.options.map(option => {
             return (
               <option
                 value={option.value}
-                key={option.id}
-                selected={props.value === option.value}>
+                key={option.id}>
                 {option.label}
               </option>
             );
@@ -36,17 +32,16 @@ DropdownSelect.propTypes = {
       PropTypes.number
     ]
   ),
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   className: PropTypes.string,
   handleChange: PropTypes.func
 
 }
 
 DropdownSelect.defaultProps = {
-  value: null,
+  value: '',
   handleChange: null,
-  className: '',
-  label: ''
+  className: ''
 };
 
 export {DropdownSelect};

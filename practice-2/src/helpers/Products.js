@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import {HeaderColumns, ProductListData, ManufacturersData, CategoriesData, DefaultProduct} from './../constants/DataObjects';
+import {Columns, ProductListData, ManufacturersData, CategoriesData, DefaultProduct} from './../constants/DataObjects';
 
 const ProductHelpers = {
   loadProductList: function() {
@@ -14,8 +14,8 @@ const ProductHelpers = {
     return ManufacturersData
   },
 
-  loadHeaderColumns: function() {
-    return HeaderColumns
+  loadColumns: function() {
+    return Columns
   },
 
   findProductById: function(id, productList) {
@@ -71,6 +71,10 @@ const ProductHelpers = {
     }
 
     return curObject;
+  },
+
+  compareObject: function(firstObject, secondObject) {
+    return _.isEqual(firstObject, secondObject);
   }
 }
 

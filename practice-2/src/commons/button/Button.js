@@ -14,7 +14,15 @@ const Button = props => {
 }
 
 Button.propTypes = {
-  label: PropTypes.string.isRequired
+  name: PropTypes.string,
+  className: PropTypes.string,
+  label: PropTypes.string.isRequired,
+  handleClick: PropTypes.func.isRequired
 }
+
+Button.defaultProps = {
+  name: '',
+  className: ''
+};
 
 export {Button};

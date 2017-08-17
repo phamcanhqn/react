@@ -2,16 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {SortIcon} from './../../commons/sort-icon/SortIcon';
-import {Input} from './../../commons/input/Input';
-import {DropdownSelect} from './../../commons/dropdown-select/DropdownSelect';
 
 import './style/ProductListHeader.css';
 
 class ProductListHeader extends React.PureComponent {
-	constructor(props) {
-		super(props);
-	}
-
 	handleSortClick = (event) => {
     const sortBy = event.target.getAttribute('name');
 		this.props.handleSortClick(event.target, sortBy);
@@ -24,7 +18,7 @@ class ProductListHeader extends React.PureComponent {
           {
             this.props.headerColumns.map((col) => {
               return (
-                <th>
+                <th key={col.name}>
                   <span className="header-title" name={col.name} onClick={col.isAllowedSort ? this.handleSortClick : null}>
                     {col.display}
                     <SortIcon className={`sort-icon ${this.props.sortBy === col.name ? this.props.sortType : ""}`} />
@@ -38,5 +32,18 @@ class ProductListHeader extends React.PureComponent {
 		);
 	}
 }
+
+ProductListHeader.propTypes = {
+  headerColumns: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleSortClick: PropTypes.func,
+  sortType: PropTypes.string,
+  sortBy: PropTypes.string
+};
+
+ProductListHeader.defaultProps = {
+  handleSortClick: null,
+  sortType: '',
+  sortBy: ''
+};
 
 export default ProductListHeader;

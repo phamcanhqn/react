@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
 
 import {Button} from './../commons/button/Button';
 import FilterProduct from './filter-product/FilterProduct';
 import ProductListHeader from './product-list-header/ProductListHeader';
 import ProductList from './product-list/ProductList';
-import {HeaderColumns, ProductListData, ManufacturersData, CategoriesData, DefaultProduct} from './../constants/DataObjects';
+import {ProductHelpers} from './../helpers/Products';
 
 import './style/ProductListManage.css';
 
@@ -15,39 +14,31 @@ class ProductsManage extends React.Component {
 		super(props);
 
     this.state = {
-      products: ProductListData.data,
-      originalProducts:ProductListData.data,
-      filterValue: {},
+      products: ProductHelpers.loadProductList(),
+      originalProducts: ProductHelpers.loadProductList(),
+      filterData: {},
       sortBy:'',
       sortType: '',
-      rowEditing: null,
+      actionType: '',
       productEditing: {}
     };
 	}
 
   //============== Handle Fillter ===============
   handleFillterAction = (event) => {
-    const filterValue = this.state.filterValue;
-    let products = this.state.originalProducts;
+    const filterData = this.state.filterData;
+    let newProducts = ProductHelpers.filterProducts(filterData, this.state.originalProducts);
 
-    _.forOwn(filterValue, function(value, key) {
-      if (value !== '') {
-        products = _.filter(products, function(product) {
-          return product[key].toString().indexOf(value) !== -1;
-        });
-      }
-    });
-
-    this.setState({products});
+    this.setState({products: newProducts});
   }
 
   handleChangeFilterValue = (value, filterBy) => {
     this.setState(preState => {
-      let filterValue = preState.filterValue;
-      filterValue[filterBy] = value;
+      let filterData = preState.filterData;
+      filterData = ProductHelpers.updateDataObject(value, filterBy, filterData);
 
       return {
-        filterValue
+        filterData
       }
     });
   }
@@ -55,25 +46,12 @@ class ProductsManage extends React.Component {
   handleSortAction = (target, sortBy) => {
     const sortIcon = target.getElementsByClassName('sort-icon')[0];
     const sortType = this.checkSortType(sortIcon);
+    const productsSorted = ProductHelpers.sortProductList(sortBy, sortType, this.state.products);
 
     this.setState({
       sortType,
-      sortBy: sortType ? sortBy : ''
-    });
-
-    this.sortProductList(sortBy, sortType);
-  }
-
-  //sort
-  sortProductList = (sortBy, sortType) => {
-    let productSort = this.state.products;
-
-    productSort = _.sortBy(productSort, function(product){
-      return product[sortBy];
-    });
-
-    this.setState({
-      products: sortType === 'asc-sort' ? productSort : (!sortType ? this.state.originalProducts : productSort.reverse())
+      sortBy: sortType ? sortBy : '',
+      products: !sortType ? this.state.originalProducts : productsSorted
     });
   }
 
@@ -89,19 +67,23 @@ class ProductsManage extends React.Component {
 
   //============ Handle Edit Action =================
   handleEditAction = (id) => {
-    this.setState(preState => {
-      const productEditing = this.findProductById(id, preState.products);
-
+    this.setState(() => {
+      const product = ProductHelpers.findProductById(id, this.state.products);
+      const productEditing = Object.assign({}, product);
       return {
-        rowEditing: id,
+        actionType: 'update',
         productEditing
       }
     });
   }
 
   handleCancelAction = id => {
+    if (this.state.actionType === 'add') {
+      this.handleDeleteAction(id);
+    }
+
     this.setState({
-      rowEditing: null,
+      actionType: '',
       productEditing: {}
     });
   }
@@ -110,7 +92,7 @@ class ProductsManage extends React.Component {
   handleChangeValueAction = (value, fieldName) => {
     this.setState(preState => {
       let productEditing = preState.productEditing;
-      productEditing[fieldName] = value;
+      productEditing = ProductHelpers.updateDataObject(value, fieldName, productEditing);
 
       return {
         productEditing
@@ -122,15 +104,14 @@ class ProductsManage extends React.Component {
   handleSaveAction = id => {
     const productEditing = this.state.productEditing;
 
-    const index = _.findIndex(this.state.products, productEditing);
+    const index = ProductHelpers.findIndexProductById(id, this.state.products)
 
     this.setState(preState => {
       preState.products.splice(index, 1, productEditing);
 
       return {
         products: preState.products,
-        productEditing: {},
-        rowEditing: null
+        productEditing: {}
       }
     });
   }
@@ -138,11 +119,12 @@ class ProductsManage extends React.Component {
   //========== Handle add new product========
   handleAddProductAction = () => {
     this.setState(preState => {
-      preState.products.push(DefaultProduct);
+      const dataReturn = ProductHelpers.addEmptyProduct(preState.products);
+
       return {
-        products: preState.products,
-        rowEditing: DefaultProduct.id,
-        productEditing: DefaultProduct
+        actionType: 'add',
+        products: dataReturn.newProductList,
+        productEditing: Object.assign({},dataReturn.product)
       }
     });
   }
@@ -150,21 +132,10 @@ class ProductsManage extends React.Component {
   //==== Handle delete product ============
   handleDeleteAction = id => {
     this.setState(preState => {
-      products: this.removeProduct(id, preState.products)
+      products: ProductHelpers.removeProduct(id, preState.products)
     });
   }
 
-  removeProduct = (id, productList) => {
-    _.remove(productList, function(product) {
-      return product.id === id;
-    });
-  }
-
-  findProductById = (id, productList) => {
-    return _.find(productList, function(product) {
-      return product.id === id;
-    });
-  }
 	render() {
     console.log('this.state', this.state)
 		return (
@@ -173,9 +144,9 @@ class ProductsManage extends React.Component {
           Product List
         </h1>
         <FilterProduct
-          filterValue={this.state.filterValue}
-          manufacturerOptions={ManufacturersData}
-          categoryOptions={CategoriesData}
+          filterValue={this.state.filterData}
+          manufacturerOptions={ProductHelpers.loadManufacturers()}
+          categoryOptions={ProductHelpers.loadCategories()}
           handleFilterClick={this.handleFillterAction}
           handleChangeFilterValue={this.handleChangeFilterValue} />
         <Button
@@ -186,14 +157,13 @@ class ProductsManage extends React.Component {
         <table className="products-table">
           <ProductListHeader
             handleSortClick={this.handleSortAction}
-            headerColumns={HeaderColumns}
+            headerColumns={ProductHelpers.loadHeaderColumns()}
             sortType={this.state.sortType}
             sortBy={this.state.sortBy} />
           <ProductList
-            rowEditing={this.state.rowEditing}
             handleSortAction={this.handleSortAction}
-            manufacturerOptions={ManufacturersData}
-            categoryOptions={CategoriesData}
+            manufacturerOptions={ProductHelpers.loadManufacturers()}
+            categoryOptions={ProductHelpers.loadCategories()}
             products={this.state.products}
             productEditing={this.state.productEditing}
             handleChangeValueAction={this.handleChangeValueAction}

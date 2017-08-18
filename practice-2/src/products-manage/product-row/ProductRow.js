@@ -1,17 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+
 import {Input} from './../../commons/input/Input';
 import {Button} from './../../commons/button/Button';
 import {DropdownSelect} from './../../commons/dropdown-select/DropdownSelect';
-
+import {ProductHelpers} from './../../helpers/Products';
 import './style/ProductRow.css';
 
 class ProductRow extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   handleButtonEdit = id => {
     this.props.handleButtonEdit(id);
   }
@@ -36,109 +32,129 @@ class ProductRow extends React.Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     return this.props.isEditMode !== nextProps.isEditMode ||
-      this.compareProductData(this.props.product, nextProps.product);
+      !ProductHelpers.compareObject(this.props.product, nextProps.product);
   }
 
+  renderElementByType = (type, name) => {
+    let element;
 
-  compareProductData = (oldProuct, newProduct) => {
-    return _.isEqual(oldProuct, newProduct)
+    switch (type){
+      case 'input':
+        element = (
+            <Input
+              name={name}
+              className={`value-input ${'input-' + name}`}
+              value={this.props.product[name]}
+              handleChange={this.handleChangeValue} />
+          );
+        break;
+      case 'dropdown':
+        element = (
+          <DropdownSelect
+            name={name}
+            className={`value-dropdown ${'input-' + name}`}
+            options={this.props[name + 'Options']}
+            value={this.props.product[name]}
+            handleChange={this.handleChangeValue} />
+        );
+        break;
+      default:
+        element = null;
+    }
+
+    return element;
+  }
+
+  renderButton = (Button, productId, name) => {
+    let handleClickButton;
+    let buttonName;
+
+    switch(name) {
+      case 'edit':
+        handleClickButton = this.handleButtonEdit.bind(this, productId);
+        buttonName = 'Edit';
+        break;
+      case 'delete':
+        handleClickButton = this.handleButtonDelete.bind(this, productId);
+        buttonName = 'Delete';
+        break;
+      case 'save':
+        handleClickButton = this.handleButtonSave.bind(this, productId);
+        buttonName = 'Save';
+        break;
+      case 'cancel':
+        handleClickButton = this.handleButtonCancel.bind(this, productId);
+        buttonName = 'Cancel';
+        break;
+      default:
+        handleClickButton = null;
+        buttonName= '';
+    }
+
+    return class extends React.Component {
+      render() {
+        return (
+          <Button
+            name={'btn '+ name}
+            className="btn"
+            handleClick={handleClickButton}
+            label={buttonName}/>
+        );
+      }
+    }
   }
 
   render() {
-    if (!this.props.isEditMode) {
-      return (
-        <tr>
-          <td>{this.props.product.code}</td>
-          <td>{this.props.product.name}</td>
-          <td>{this.props.product.manufacturer}</td>
-          <td>{this.props.product.description}</td>
-          <td>{this.props.product.category}</td>
-          <td>{this.props.product.price}</td>
-          <td>{this.props.product.quantity}</td>
-          <td>
-            <Button
-              name="btn-edit"
-              className="btn"
-              handleClick={this.handleButtonEdit.bind(this, this.props.product.id)}
-              label="Edit"/>
-            <Button
-              name="btn-delete"
-              className="btn"
-              handleClick={this.handleButtonDelete.bind(this, this.props.product.id)}
-              label="Delete"/>
-          </td>
-        </tr>
-      );
-    } else {
-      return (
-        <tr>
-          <td>
-            <Input
-              name="code"
-              value={this.props.product.code}
-              className="code-input"
-              handleChange={this.handleChangeValue} />
-          </td>
-          <td>
-            <Input
-              name="name"
-              value={this.props.product.name}
-              className="name-input"
-              handleChange={this.handleChangeValue} />
-          </td>
-          <td>
-            <DropdownSelect
-              name="manufacturer"
-              value={this.props.product.manufacturer}
-              className="dropdown-select manufacturer-select"
-              options={this.props.manufacturerOptions}
-              handleChange={this.handleChangeValue} />
-          </td>
-          <td>
-            <Input
-              name="description"
-              value={this.props.product.description}
-              className="description-input"
-              handleChange={this.handleChangeValue} />
-          </td>
-          <td>
-             <DropdownSelect
-              name="category"
-              value={this.props.product.category}
-              className="dropdown-select category-select"
-              options={this.props.categoryOptions}
-              handleChange={this.handleChangeValue} />
-          </td>
-          <td>
-            <Input
-              name="price"
-              value={this.props.product.price}
-              className="price-input"
-              handleChange={this.handleChangeValue} />
-          </td>
-          <td>
-            <Input
-              name="quantity"
-              value={this.props.product.quantity}
-              className="quantity-input"
-              handleChange={this.handleChangeValue} />
-          </td>
-          <td>
-            <Button
-              name="btn-save"
-              className="btn"
-              handleClick={this.handleButtonSave.bind(this, this.props.product.id)}
-              label="Save"/>
-            <Button
-              name="btn-cancel"
-              className="btn"
-              handleClick={this.handleButtonCancel.bind(this, this.props.product.id)}
-              label="Cancel"/>
-          </td>
-        </tr>
-      );
-    }
+    return (
+      <tr>
+        {
+          this.props.dataColumns.map(col => {
+            if (col.name !== 'action') {
+              if (!this.props.isEditMode) {
+                return (<td key={col.name}>{this.props.product[col.name]}</td>);
+              } else {
+                return (<td key={col.name}>{this.renderElementByType(col.elementType, col.name)}</td>);
+              }
+            } else {
+              if (!this.props.isEditMode) {
+                const EditButton = this.renderButton(Button, this.props.product.id, 'edit');
+                const DeleteButton = this.renderButton(Button, this.props.product.id, 'delete');
+
+                return (
+                  <td>
+                    <EditButton key='button-edit' />
+                    <DeleteButton key='button-delete' />
+                  </td>
+                );
+              } else {
+                const SaveButton = this.renderButton(Button, this.props.product.id, 'save');
+                const CancelButton = this.renderButton(Button, this.props.product.id, 'cancel');
+
+                return (
+                  <td>
+                    <SaveButton key='button-save' />
+                    <CancelButton key='button-cancel' />
+                  </td>
+                );
+              }
+            }
+          })
+        }
+      </tr>
+    );
   }
+}
+
+ProductRow.propTypes = {
+  product: PropTypes.object.isRequired,
+  handleButtonEdit: PropTypes.func.isRequired,
+  handleButtonSave: PropTypes.func.isRequired,
+  handleButtonDelete: PropTypes.func.isRequired,
+  handleChangeCancel:  PropTypes.func
+}
+
+ProductRow.defaultProps = {
+  handleChangeCancel: null
 }
 
 export default ProductRow;

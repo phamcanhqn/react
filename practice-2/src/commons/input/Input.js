@@ -25,7 +25,7 @@ Input.propTypes = {
 }
 
 Input.defaultProps = {
-  value: null,
+  value: '',
   handleChange: null,
   className: ''
 };

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import {Button} from './../commons/button/Button';
 import FilterProduct from './filter-product/FilterProduct';
@@ -29,12 +28,14 @@ class ProductsManage extends React.Component {
     const filterData = this.state.filterData;
     let newProducts = ProductHelpers.filterProducts(filterData, this.state.originalProducts);
 
-    this.setState({products: newProducts});
+    this.setState({
+      products: newProducts
+    });
   }
 
   handleChangeFilterValue = (value, filterBy) => {
     this.setState(preState => {
-      let filterData = preState.filterData;
+      let filterData = Object.assign({}, preState.filterData);
       filterData = ProductHelpers.updateDataObject(value, filterBy, filterData);
 
       return {
@@ -42,6 +43,14 @@ class ProductsManage extends React.Component {
       }
     });
   }
+
+  handleClearAction = () => {
+    this.filterForm.reset();
+    this.setState({
+      filterData: {}
+    });
+  }
+
   //================== Handle sort==================
   handleSortAction = (target, sortBy) => {
     const sortIcon = target.getElementsByClassName('sort-icon')[0];
@@ -91,7 +100,7 @@ class ProductsManage extends React.Component {
   //=========== Handle Change Value ==========
   handleChangeValueAction = (value, fieldName) => {
     this.setState(preState => {
-      let productEditing = preState.productEditing;
+      let productEditing = Object.assign({}, preState.productEditing);
       productEditing = ProductHelpers.updateDataObject(value, fieldName, productEditing);
 
       return {
@@ -132,7 +141,13 @@ class ProductsManage extends React.Component {
   //==== Handle delete product ============
   handleDeleteAction = id => {
     this.setState(preState => {
-      products: ProductHelpers.removeProduct(id, preState.products)
+      const products =ProductHelpers.removeProduct(id, preState.products);
+
+      return {
+        products,
+        sortBy:'',
+        sortType: ''
+      }
     });
   }
 
@@ -144,10 +159,13 @@ class ProductsManage extends React.Component {
           Product List
         </h1>
         <FilterProduct
+          formRef={form => {this.filterForm = form}}
           filterValue={this.state.filterData}
+          filterColumns={ProductHelpers.loadColumns()}
           manufacturerOptions={ProductHelpers.loadManufacturers()}
           categoryOptions={ProductHelpers.loadCategories()}
-          handleFilterClick={this.handleFillterAction}
+          handleFilterAction={this.handleFillterAction}
+          handleClearAction={this.handleClearAction}
           handleChangeFilterValue={this.handleChangeFilterValue} />
         <Button
           name="btn-add"
@@ -157,7 +175,7 @@ class ProductsManage extends React.Component {
         <table className="products-table">
           <ProductListHeader
             handleSortClick={this.handleSortAction}
-            headerColumns={ProductHelpers.loadHeaderColumns()}
+            headerColumns={ProductHelpers.loadColumns()}
             sortType={this.state.sortType}
             sortBy={this.state.sortBy} />
           <ProductList
@@ -165,6 +183,7 @@ class ProductsManage extends React.Component {
             manufacturerOptions={ProductHelpers.loadManufacturers()}
             categoryOptions={ProductHelpers.loadCategories()}
             products={this.state.products}
+            dataColumns={ProductHelpers.loadColumns()}
             productEditing={this.state.productEditing}
             handleChangeValueAction={this.handleChangeValueAction}
             handleEditAction={this.handleEditAction}

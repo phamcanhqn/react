@@ -44,46 +44,62 @@ const CategoriesData = [
   }
 ];
 
-const HeaderColumns = [
+const Columns = [
   {
     name: 'code',
     display: 'Code',
-    isAllowedSort: true
+    elementType: 'input',
+    isAllowedSort: true,
+    isAllowedFilter: true,
   },
   {
     name: 'name',
     display: 'Name',
-    isAllowedSort: true
+    elementType: 'input',
+    isAllowedSort: true,
+    isAllowedFilter: true,
   },
   {
     name: 'manufacturer',
     display: 'Manufacturer',
-    isAllowedSort: true
+    elementType: 'dropdown',
+    isAllowedSort: true,
+    isAllowedFilter: true,
   },
   {
     name: 'description',
     display: 'Description',
-    isAllowedSort: true
+    elementType: 'input',
+    isAllowedSort: true,
+    isAllowedFilter: true,
   },
   {
     name: 'category',
     display: 'Category',
-    isAllowedSort: true
+    elementType: 'dropdown',
+    isAllowedSort: true,
+    isAllowedFilter: true,
   },
   {
     name: 'price',
     display: 'Price',
-    isAllowedSort: true
+    elementType: 'input',
+    isAllowedSort: true,
+    isAllowedFilter: true,
   },
   {
     name: 'quantity',
     display: 'Quantity',
-    isAllowedSort: true
+    elementType: 'input',
+    isAllowedSort: true,
+    isAllowedFilter: true,
   },
   {
     name: 'action',
     display: 'Action',
-    isAllowedSort: false
+    elementType: 'label',
+    isAllowedSort: false,
+    isAllowedFilter: false,
   }
 ];
 
@@ -150,4 +166,4 @@ const DefaultProduct = {
   price: null,
   quantity: null
 }
-export {HeaderColumns, ProductListData, ManufacturersData, CategoriesData, DefaultProduct};
+export {Columns, ProductListData, ManufacturersData, CategoriesData, DefaultProduct};

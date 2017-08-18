@@ -6,19 +6,17 @@ import './style/SortIcon.css';
 const SortIcon = props => {
 	return (
 		<span
-			className={props.className}>{props.characterSort}
+			className={props.className}>
     </span>
 	);
 };
 
 SortIcon.propTypes = {
-  className: PropTypes.string,
-  characterSort: PropTypes.string
+  className: PropTypes.string
 };
 
 SortIcon.defaultProps = {
-  className: '',
-  characterSort: ''
+  className: ''
 };
 
 export {SortIcon};

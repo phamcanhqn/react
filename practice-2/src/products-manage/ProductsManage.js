@@ -109,6 +109,7 @@ class ProductsManage extends React.Component {
     this.setState(() => {
       const product = ProductHelpers.findProductById(id, this.state.products);
       const productEditing = Object.assign({}, product);
+
       return {
         actionType: 'update',
         productEditing
@@ -228,7 +229,6 @@ class ProductsManage extends React.Component {
             sortType={this.state.sortType}
             sortBy={this.state.sortBy} />
           <ProductList
-            handleSortAction={this.handleSortAction}
             manufacturerOptions={this.manufacturers}
             categoryOptions={this.categories}
             products={this.state.products}

@@ -29,11 +29,15 @@
 ```
 * Use it
 ```
+let clickFucntion = () => {
+  alert('Button clicked!');
+}
   <Button
       name="btn-filter"
       className="btn"
-      handleClick={this.handleFilterAction}
-      label="Filter"/>
+      handleClick={clickFucntion}
+      label="Button"/>
+}
 ```
 ### Input
 ### SortIcon

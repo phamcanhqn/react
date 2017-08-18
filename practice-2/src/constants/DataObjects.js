@@ -166,4 +166,5 @@ const DefaultProduct = {
   price: null,
   quantity: null
 }
+
 export {Columns, ProductListData, ManufacturersData, CategoriesData, DefaultProduct};

@@ -5,6 +5,7 @@ import {Input} from './../../commons/input/Input';
 import {Button} from './../../commons/button/Button';
 import {DropdownSelect} from './../../commons/dropdown-select/DropdownSelect';
 import {ProductHelpers} from './../../helpers/Products';
+
 import './style/ProductRow.css';
 
 class ProductRow extends React.Component {
@@ -35,6 +36,10 @@ class ProductRow extends React.Component {
       !ProductHelpers.compareObject(this.props.product, nextProps.product);
   }
 
+  /*
+  * Render element with type and name
+  * Return a element
+  */
   renderElementByType = (type, name) => {
     let element;
 
@@ -43,6 +48,7 @@ class ProductRow extends React.Component {
         element = (
             <Input
               name={name}
+              type={(name === 'quantity' || name === 'price') && 'number'}
               className={`value-input ${'input-' + name}`}
               value={this.props.product[name]}
               handleChange={this.handleChangeValue} />
@@ -65,6 +71,10 @@ class ProductRow extends React.Component {
     return element;
   }
 
+  /*
+  * HOC: Create button with name and handle click action
+  * Return new component
+  */
   renderButton = (Button, productId, name) => {
     let handleClickButton;
     let buttonName;
@@ -122,8 +132,8 @@ class ProductRow extends React.Component {
 
                 return (
                   <td>
-                    <EditButton key='button-edit' />
-                    <DeleteButton key='button-delete' />
+                    <EditButton />
+                    <DeleteButton />
                   </td>
                 );
               } else {
@@ -132,8 +142,8 @@ class ProductRow extends React.Component {
 
                 return (
                   <td>
-                    <SaveButton key='button-save' />
-                    <CancelButton key='button-cancel' />
+                    <SaveButton />
+                    <CancelButton />
                   </td>
                 );
               }

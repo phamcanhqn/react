@@ -29,6 +29,10 @@ class FilterProduct extends React.Component {
     return !ProductHelpers.compareObject(this.props.filterValue, nextProps.filterValue);
   }
 
+  /*
+  * Render element with type and name
+  * Return a element
+  */
   renderElementByType = (type, name) => {
     let element;
 

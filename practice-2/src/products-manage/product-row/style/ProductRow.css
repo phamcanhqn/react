@@ -1,4 +1,9 @@
 .btn-edit,
 .btn-save{
   margin-right: 5px;
+  background-color: #d1dcad;
+}
+
+.btn-delete {
+  background-color: #716a6b;
 }

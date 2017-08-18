@@ -1,15 +1,10 @@
 .products-manage {
   margin: 10px auto;
-  width: 1200px;
-}
-
-.products-table {
-  margin: 0 auto;
-  width: 100%;
+  width: 1500px;
 }
 
 .btn-add {
   float: left;
-
   margin: 10px 0;
+  background-color: #36da60;
 }

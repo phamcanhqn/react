@@ -29,6 +29,10 @@ class FilterProduct extends React.Component {
     return !ProductHelpers.compareObject(this.props.filterValue, nextProps.filterValue);
   }
 
+  /*
+  * Render element with type and name
+  * Return a element
+  */
   renderElementByType = (type, name) => {
     let element;
 
@@ -96,6 +100,10 @@ class FilterProduct extends React.Component {
 }
 
 FilterProduct.propTypes = {
+  formRef: PropTypes.func,
+  handleClearAction: PropTypes.func,
+  handleFilterAction: PropTypes.func,
+  handleChangeFilterValue: PropTypes.func,
   filterColumns: PropTypes.arrayOf(PropTypes.object),
   filterValue: PropTypes.object,
   categoryOptions: PropTypes.arrayOf(PropTypes.object),
@@ -103,6 +111,10 @@ FilterProduct.propTypes = {
 };
 
 FilterProduct.defaultProps = {
+  formRef: null,
+  handleClearAction: null,
+  handleFilterAction: null,
+  handleChangeFilterValue: null,
   filterColumns: [],
   filterValue: {},
   categoryOptions: [],

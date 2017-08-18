@@ -11,6 +11,10 @@
   display: flex;
   font-weight: bold;
 }
+.filter-value label {
+  padding: 5px 10px;
+}
+
 /*
 .filter-value .filter-input,
 .filter-value .filter-dropdown {
@@ -24,6 +28,7 @@
 
 .filter-button button {
   margin-left: 20px;
+  width: 70px;
 }
 
 .filter-form label {

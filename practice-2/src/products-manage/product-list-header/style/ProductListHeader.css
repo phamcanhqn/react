@@ -7,24 +7,3 @@ th {
   position: relative;
   padding-left: 10px;
 }
-
-.asc-sort:before,
-.desc-sort:before {
-	border: 4px solid transparent;
-  content: "";
-  display: block;
-  height: 0;
-  right: 5px;
-  top: 50%;
-  position: absolute;
-  width: 0;
-}
-
-.asc-sort:before {
-  border-bottom-color: #000;
-  margin-top: -9px;
-}
-.desc-sort:before {
-  border-top-color: #000;
-  margin-top: 1px;
-}

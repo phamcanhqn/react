@@ -12,6 +12,10 @@ class ProductsManage extends React.Component {
 	constructor(props) {
 		super(props);
 
+    this.columns = ProductHelpers.loadColumns();
+    this.manufacturers = ProductHelpers.loadManufacturers();
+    this.categories = ProductHelpers.loadCategories();
+
     this.state = {
       products: ProductHelpers.loadProductList(),
       originalProducts: ProductHelpers.loadProductList(),
@@ -23,8 +27,11 @@ class ProductsManage extends React.Component {
     };
 	}
 
-  //============== Handle Fillter ===============
-  handleFillterAction = (event) => {
+  /*
+  * Handle filter action
+  * Query data in product list with filter values and update product list
+  */
+  handleFillterAction = () => {
     const filterData = this.state.filterData;
     let newProducts = ProductHelpers.filterProducts(filterData, this.state.originalProducts);
 
@@ -33,6 +40,10 @@ class ProductsManage extends React.Component {
     });
   }
 
+  /*
+  * Handle input value action on filter form
+  * Get data from filter form and save data on this form
+  */
   handleChangeFilterValue = (value, filterBy) => {
     this.setState(preState => {
       let filterData = Object.assign({}, preState.filterData);
@@ -44,6 +55,10 @@ class ProductsManage extends React.Component {
     });
   }
 
+  /*
+  * Handle clear action on filter form
+  * Remove filter data and reset filter form
+  */
   handleClearAction = () => {
     this.filterForm.reset();
     this.setState({
@@ -51,7 +66,10 @@ class ProductsManage extends React.Component {
     });
   }
 
-  //================== Handle sort==================
+  /*
+  * Handle sort action on product list
+  * Check sort type and sort by field on product list and sorting products list
+  */
   handleSortAction = (target, sortBy) => {
     const sortIcon = target.getElementsByClassName('sort-icon')[0],
       sortType = this.checkSortType(sortIcon),
@@ -64,6 +82,10 @@ class ProductsManage extends React.Component {
     });
   }
 
+  /*
+  * Check sort type when user click on header of table
+  * Return sort type
+  */
   checkSortType = sortIcon => {
     if (sortIcon.classList.contains('asc-sort')) {
       return 'desc-sort';
@@ -74,7 +96,10 @@ class ProductsManage extends React.Component {
     }
   }
 
-  //============ Handle Edit Action =================
+  /*
+  * Handle edit action on product row
+  * Show editing product and user can update product value
+  */
   handleEditAction = (id) => {
     if (this.state.actionType) {
       alert('Please save your current data!');
@@ -91,6 +116,10 @@ class ProductsManage extends React.Component {
     });
   }
 
+  /*
+  * Handle cancel action on product row
+  * Close editing form and show old data of product
+  */
   handleCancelAction = id => {
     if (this.state.actionType === 'add') {
       this.handleDeleteAction(id);
@@ -102,7 +131,10 @@ class ProductsManage extends React.Component {
     });
   }
 
-  //=========== Handle Change Value ==========
+  /*
+  * Handle change value action on product row
+  * Save all data changed on product row
+  */
   handleChangeValueAction = (value, fieldName) => {
     this.setState(preState => {
       let productEditing = Object.assign({}, preState.productEditing);
@@ -114,7 +146,10 @@ class ProductsManage extends React.Component {
     });
   }
 
-  //======== Handle save ============
+  /*
+  * Handle save action on product row
+  * Save all value input on row and show new product list
+  */
   handleSaveAction = id => {
     const productEditing = this.state.productEditing;
 
@@ -131,7 +166,10 @@ class ProductsManage extends React.Component {
     });
   }
 
-  //========== Handle add new product========
+  /*
+  * Handle add new product action
+  * Insert a product row in current product list and user can input value for new product
+  */
   handleAddProductAction = () => {
     if (this.state.actionType) {
       alert('Please save your current data!');
@@ -149,7 +187,10 @@ class ProductsManage extends React.Component {
     });
   }
 
-  //==== Handle delete product ============
+  /*
+  * Handle delete action on product row
+  * Remove product row and update product list
+  */
   handleDeleteAction = id => {
     this.setState(preState => {
       ProductHelpers.removeProduct(id, preState.products);
@@ -160,7 +201,7 @@ class ProductsManage extends React.Component {
   }
 
 	render() {
-    console.log('this.state', this.state)
+    console.log('this.state', this.state);
 		return (
       <div className='products-manage'>
         <h1>
@@ -169,9 +210,9 @@ class ProductsManage extends React.Component {
         <FilterProduct
           formRef={form => {this.filterForm = form}}
           filterValue={this.state.filterData}
-          filterColumns={ProductHelpers.loadColumns()}
-          manufacturerOptions={ProductHelpers.loadManufacturers()}
-          categoryOptions={ProductHelpers.loadCategories()}
+          filterColumns={this.columns}
+          manufacturerOptions={this.manufacturers}
+          categoryOptions={this.categories}
           handleFilterAction={this.handleFillterAction}
           handleClearAction={this.handleClearAction}
           handleChangeFilterValue={this.handleChangeFilterValue} />
@@ -179,19 +220,19 @@ class ProductsManage extends React.Component {
           name="btn-add"
           className="btn-add"
           handleClick={this.handleAddProductAction}
-          label="Add" />
+          label="Add New Product" />
         <table className="products-table">
           <ProductListHeader
             handleSortClick={this.handleSortAction}
-            headerColumns={ProductHelpers.loadColumns()}
+            headerColumns={this.columns}
             sortType={this.state.sortType}
             sortBy={this.state.sortBy} />
           <ProductList
             handleSortAction={this.handleSortAction}
-            manufacturerOptions={ProductHelpers.loadManufacturers()}
-            categoryOptions={ProductHelpers.loadCategories()}
+            manufacturerOptions={this.manufacturers}
+            categoryOptions={this.categories}
             products={this.state.products}
-            dataColumns={ProductHelpers.loadColumns()}
+            dataColumns={this.columns}
             productEditing={this.state.productEditing}
             handleChangeValueAction={this.handleChangeValueAction}
             handleEditAction={this.handleEditAction}

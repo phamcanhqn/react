@@ -1,6 +1,11 @@
+th {
+  background-color: gray;
+}
+
 .header-title {
 	display: flex;
   position: relative;
+  padding-left: 10px;
 }
 
 .asc-sort:before,
@@ -16,10 +21,10 @@
 }
 
 .asc-sort:before {
-  border-bottom-color: #666;
+  border-bottom-color: #000;
   margin-top: -9px;
 }
 .desc-sort:before {
-  border-top-color: #666;
+  border-top-color: #000;
   margin-top: 1px;
 }

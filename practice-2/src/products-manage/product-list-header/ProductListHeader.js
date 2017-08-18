@@ -7,8 +7,8 @@ import './style/ProductListHeader.css';
 
 class ProductListHeader extends React.PureComponent {
 	handleSortClick = (event) => {
-    const sortBy = event.target.getAttribute('name');
-		this.props.handleSortClick(event.target, sortBy);
+    const sortBy = event.currentTarget.getAttribute('name');
+		this.props.handleSortClick(event.currentTarget, sortBy);
 	}
 
 	render() {
@@ -20,8 +20,10 @@ class ProductListHeader extends React.PureComponent {
               return (
                 <th
                   key={col.name}
-                  className={col.name + "-column"}>
-                  <span className="header-title" name={col.name} onClick={col.isAllowedSort ? this.handleSortClick : null}>
+                  className={col.name + "-column"}
+                  name={col.name}
+                  onClick={col.isAllowedSort ? this.handleSortClick : null}>
+                  <span className="header-title">
                     {col.display}
                     <SortIcon className={`sort-icon ${this.props.sortBy === col.name ? this.props.sortType : ""}`} />
                   </span>

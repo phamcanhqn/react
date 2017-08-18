@@ -29,60 +29,67 @@ class FilterProduct extends React.Component {
     return !ProductHelpers.compareObject(this.props.filterValue, nextProps.filterValue);
   }
 
+  renderElementByType = (type, name) => {
+    let element;
+
+    switch (type){
+      case 'input':
+        element = (
+            <Input
+              name={name}
+              className={`filter-input ${'filter-' + name}`}
+              value={this.props.filterValue[name]}
+              handleChange={this.handleChangeFilterValue} />
+          );
+        break;
+      case 'dropdown':
+        element = (
+          <DropdownSelect
+            name={name}
+            className={`filter-dropdown ${'filter-' + name}`}
+            options={this.props[name + 'Options']}
+            value={this.props.filterValue[name]}
+            handleChange={this.handleChangeFilterValue} />
+        );
+        break;
+      default:
+        element = null;
+    }
+
+    return element;
+  }
+
   render() {
     return (
       <form className="filter-form" ref={this.props.formRef}>
-        <div className="filter-value">
-        { this.props.filterColumns.map((col) => {
-          if (col.name === 'action') return null;
+        <fieldset>
+          <legend>Filter Products</legend>
+            <div className="filter-value">
+            { this.props.filterColumns.map((col) => {
+              if (!col.isAllowedFilter) return null;
 
-          let element;
-
-            switch (col.elementType){
-              case 'input':
-                element = (
-                    <Input
-                      name={col.name}
-                      className={`filter-input ${'filter-' + col.name}`}
-                      value={this.props.filterValue[col.name]}
-                      handleChange={this.handleChangeFilterValue} />
-                  );
-                break;
-              case 'dropdown':
-                element = (
-                  <DropdownSelect
-                    name={col.name}
-                    className={`filter-dropdown ${'filter-' + col.name}`}
-                    options={this.props[col.name + 'Options']}
-                    value={this.props.filterValue[col.name]}
-                    handleChange={this.handleChangeFilterValue} />
+                return (
+                  <label key={col.name}>
+                    {col.display}
+                    {this.renderElementByType(col.elementType, col.name)}
+                  </label>
                 );
-                break;
-              default:
-                element = null;
+              })
             }
-
-            return (
-              <label key={col.name}>
-                {col.display}
-                {element}
-              </label>
-            );
-          })
-        }
-        </div>
-        <div className="filter-button">
-          <Button
-            name="btn-filter"
-            className="btn"
-            handleClick={this.handleFilterAction}
-            label="Filter"/>
-          <Button
-            name="btn-clear"
-            className="btn"
-            handleClick={this.handleClearAction}
-            label="Clear"/>
-        </div>
+            </div>
+            <div className="filter-button">
+              <Button
+                name="btn-filter"
+                className="btn"
+                handleClick={this.handleFilterAction}
+                label="Filter"/>
+              <Button
+                name="btn-clear"
+                className="btn"
+                handleClick={this.handleClearAction}
+                label="Clear"/>
+            </div>
+          </fieldset>
       </form>
     );
   }

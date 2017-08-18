@@ -19,6 +19,7 @@
 ## Component Examples
 ### Button
 * Use it
+
 ```
 let clickFucntion = () => {
   alert('Button clicked!');
@@ -33,8 +34,10 @@ let name = 'btn-button;
 }
 
 ```
+
 ### Input
 * Use it
+
 ```
 let name = 'product-name';
 let class = 'name-input';
@@ -48,16 +51,21 @@ let changeDataFunction = () => {
   className={class}}
   value={nameValue}
   handleChange={changeDataFunction} />
+
 ```
+
 ### SortIcon
 * Use it
+
 ```
 let sortClass = 'sort-icon desc-sort';
 
 <SortIcon className={sortClass} />
+
 ```
 ### Dropdown
 * Use it
+
 ```
 let name = 'categories';
 let className = 'category-select';
@@ -88,9 +96,12 @@ let changeFunction = () => {
   options={options}
   value={value}
   handleChange={changeFunction} />
+
 ```
+
 ### Filter Product
 * Use it
+
 ```
 let filterValueInput = {
   description :"Apple des",
@@ -147,10 +158,13 @@ let categories= [
   handleFilterAction={handleFillterAction}
   handleClearAction={handleClearAction}
   handleChangeFilterValue={handleChangeFilterValue} />
+
 ```
+
 ### Header Product List
 
 * Use it
+
 ```
 let handleSortAction = () => {
   alert('User is sorted!')
@@ -175,10 +189,12 @@ let sortBy = 'name';
   headerColumns={columns}
   sortType={sortType}
   sortBy={sortBy} />
+
 ```
 ### Product Row
 
 * Use it
+
 ```
 let productId =
 let isEditMode = false;
@@ -251,10 +267,12 @@ let handleChangeValueAction = () => {
   handleButtonCancel={handleCancelAction}
   handleButtonDelete={handleDeleteAction}
   handleChangeValue={handleChangeValueAction} />
+
 ```
 ### Product List
 
 * Use it
+
 ```
 let manufacturers = [
   {
@@ -322,13 +340,9 @@ let handleChangeValueAction = () => {
   handleSaveAction={handleSaveAction}
   handleCancelAction={handleCancelAction}
   handleDeleteAction={handleDeleteAction} />
-```
-### Product List Manage
-
-* Use it
-```
 
 ```
+
 ## Run Practice
 
 mkdir react-practice-2

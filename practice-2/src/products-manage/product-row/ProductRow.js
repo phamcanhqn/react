@@ -95,8 +95,8 @@ class ProductRow extends React.Component {
       render() {
         return (
           <Button
-            name={'btn '+ name}
-            className="btn"
+            name={'btn-' + name}
+            className={'btn-' + name}
             handleClick={handleClickButton}
             label={buttonName}/>
         );

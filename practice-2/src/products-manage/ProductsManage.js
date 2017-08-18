@@ -53,9 +53,9 @@ class ProductsManage extends React.Component {
 
   //================== Handle sort==================
   handleSortAction = (target, sortBy) => {
-    const sortIcon = target.getElementsByClassName('sort-icon')[0];
-    const sortType = this.checkSortType(sortIcon);
-    const productsSorted = ProductHelpers.sortProductList(sortBy, sortType, this.state.products);
+    const sortIcon = target.getElementsByClassName('sort-icon')[0],
+      sortType = this.checkSortType(sortIcon),
+      productsSorted = ProductHelpers.sortProductList(sortBy, sortType, this.state.products);
 
     this.setState({
       sortType,
@@ -76,6 +76,11 @@ class ProductsManage extends React.Component {
 
   //============ Handle Edit Action =================
   handleEditAction = (id) => {
+    if (this.state.actionType) {
+      alert('Please save your current data!');
+      return;
+    }
+
     this.setState(() => {
       const product = ProductHelpers.findProductById(id, this.state.products);
       const productEditing = Object.assign({}, product);
@@ -120,6 +125,7 @@ class ProductsManage extends React.Component {
 
       return {
         products: preState.products,
+        actionType: '',
         productEditing: {}
       }
     });
@@ -127,6 +133,11 @@ class ProductsManage extends React.Component {
 
   //========== Handle add new product========
   handleAddProductAction = () => {
+    if (this.state.actionType) {
+      alert('Please save your current data!');
+      return;
+    }
+
     this.setState(preState => {
       const dataReturn = ProductHelpers.addEmptyProduct(preState.products);
 
@@ -141,12 +152,9 @@ class ProductsManage extends React.Component {
   //==== Handle delete product ============
   handleDeleteAction = id => {
     this.setState(preState => {
-      const products =ProductHelpers.removeProduct(id, preState.products);
-
+      ProductHelpers.removeProduct(id, preState.products);
       return {
-        products,
-        sortBy:'',
-        sortType: ''
+        products: preState.products
       }
     });
   }
@@ -156,7 +164,7 @@ class ProductsManage extends React.Component {
 		return (
       <div className='products-manage'>
         <h1>
-          Product List
+          Products Management Application
         </h1>
         <FilterProduct
           formRef={form => {this.filterForm = form}}
@@ -169,9 +177,9 @@ class ProductsManage extends React.Component {
           handleChangeFilterValue={this.handleChangeFilterValue} />
         <Button
           name="btn-add"
-          className="btn"
+          className="btn-add"
           handleClick={this.handleAddProductAction}
-          label="Add product"/>
+          label="Add" />
         <table className="products-table">
           <ProductListHeader
             handleSortClick={this.handleSortAction}

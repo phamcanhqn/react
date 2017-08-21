@@ -1,4 +1,4 @@
-  const ManufacturersData = [
+const ManufacturersData = [
   {
     id: 1,
     value: 'apple',
@@ -167,4 +167,10 @@ const DefaultProduct = {
   quantity: null
 }
 
-export {Columns, ProductListData, ManufacturersData, CategoriesData, DefaultProduct};
+export {
+  Columns,
+  ProductListData,
+  ManufacturersData,
+  CategoriesData,
+  DefaultProduct
+};

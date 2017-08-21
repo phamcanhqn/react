@@ -5,23 +5,23 @@ import './style/DropdownSelect.css'
 
 const DropdownSelect = props => {
   return (
-      <select
-        value={props.value}
-        name={props.name}
-        onChange={props.handleChange}
-        className={props.className}>
-        <option value=""> --Select-- </option>
-        {
-          props.options.map(option => {
-            return (
-              <option
-                value={option.value}
-                key={option.id}>
-                {option.label}
-              </option>
-            );
-          })
-        }
+    <select
+      value={props.value}
+      name={props.name}
+      onChange={props.handleChange}
+      className={props.className}>
+      <option value=""> --Select-- </option>
+      {
+        props.options.map(option => {
+          return (
+            <option
+              value={option.value}
+              key={option.id}>
+              {option.label}
+            </option>
+          );
+        })
+      }
     </select>
   );
 };

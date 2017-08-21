@@ -6,23 +6,18 @@ import {Button} from './../../commons/button/Button';
 import {DropdownSelect} from './../../commons/dropdown-select/DropdownSelect';
 import {ProductHelpers} from './../../helpers/Products';
 
+import { visualizeRender } from 'react-global-render-visualizer';
+
 import './style/ProductRow.css';
 
+if (process.env.NODE_ENV !== 'production') {
+  React.Component = visualizeRender()(React.Component);
+  React.PureComponent = visualizeRender()(React.PureComponent);
+}
+
 class ProductRow extends React.Component {
-  handleButtonEdit = id => {
-    this.props.handleButtonEdit(id);
-  }
-
-  handleButtonDelete = id => {
-    this.props.handleButtonDelete(id);
-  }
-
-  handleButtonCancel = id => {
-    this.props.handleButtonCancel(id);
-  }
-
-  handleButtonSave = id => {
-    this.props.handleButtonSave(id);
+  handleClickButton = (id, name) => {
+    this.props.handleButtonClickOnRow(id, name);
   }
 
   handleChangeValue = (event) => {
@@ -46,14 +41,16 @@ class ProductRow extends React.Component {
     switch (type){
       case 'input':
         element = (
-            <Input
-              name={name}
-              type={(name === 'quantity' || name === 'price') && 'number'}
-              className={`value-input ${'input-' + name}`}
-              value={this.props.product[name]}
-              handleChange={this.handleChangeValue} />
-          );
+          <Input
+            name={name}
+            type={(name === 'quantity' || name === 'price') && 'number'}
+            className={`value-input ${'input-' + name}`}
+            value={this.props.product[name]}
+            handleChange={this.handleChangeValue}
+          />
+        );
         break;
+
       case 'dropdown':
         element = (
           <DropdownSelect
@@ -61,9 +58,11 @@ class ProductRow extends React.Component {
             className={`value-dropdown ${'input-' + name}`}
             options={this.props[name + 'Options']}
             value={this.props.product[name]}
-            handleChange={this.handleChangeValue} />
+            handleChange={this.handleChangeValue}
+          />
         );
         break;
+
       default:
         element = null;
     }
@@ -76,28 +75,23 @@ class ProductRow extends React.Component {
   * Return new component
   */
   renderButton = (Button, productId, name) => {
-    let handleClickButton;
+    let handleClickButton = this.handleClickButton.bind(this, productId, name);
     let buttonName;
 
     switch(name) {
       case 'edit':
-        handleClickButton = this.handleButtonEdit.bind(this, productId);
         buttonName = 'Edit';
         break;
       case 'delete':
-        handleClickButton = this.handleButtonDelete.bind(this, productId);
         buttonName = 'Delete';
         break;
       case 'save':
-        handleClickButton = this.handleButtonSave.bind(this, productId);
         buttonName = 'Save';
         break;
       case 'cancel':
-        handleClickButton = this.handleButtonCancel.bind(this, productId);
         buttonName = 'Cancel';
         break;
       default:
-        handleClickButton = null;
         buttonName= '';
     }
 
@@ -108,7 +102,8 @@ class ProductRow extends React.Component {
             name={'btn-' + name}
             className={'btn-' + name}
             handleClick={handleClickButton}
-            label={buttonName}/>
+            label={buttonName}
+          />
         );
       }
     }
@@ -118,6 +113,7 @@ class ProductRow extends React.Component {
     return (
       <tr>
         {
+          //FIX ME: Need refactor code at here
           this.props.dataColumns.map(col => {
             if (col.name !== 'action') {
               if (!this.props.isEditMode) {
@@ -157,10 +153,7 @@ class ProductRow extends React.Component {
 
 ProductRow.propTypes = {
   product: PropTypes.object.isRequired,
-  handleButtonEdit: PropTypes.func.isRequired,
-  handleButtonSave: PropTypes.func.isRequired,
-  handleButtonDelete: PropTypes.func.isRequired,
-  handleChangeCancel:  PropTypes.func
+  handleButtonClickOnRow:  PropTypes.func
 }
 
 ProductRow.defaultProps = {

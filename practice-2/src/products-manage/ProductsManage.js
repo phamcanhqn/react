@@ -1,10 +1,10 @@
 import React from 'react';
 
-import {Button} from './../commons/button/Button';
+import { Button } from './../commons/button/Button';
 import FilterProduct from './filter-product/FilterProduct';
 import ProductListHeader from './product-list-header/ProductListHeader';
 import ProductList from './product-list/ProductList';
-import {ProductHelpers} from './../helpers/Products';
+import { ProductHelpers } from './../helpers/Products';
 
 import './style/ProductListManage.css';
 
@@ -201,6 +201,28 @@ class ProductsManage extends React.Component {
     });
   }
 
+  handleButtonOnRow = (id, name) => {
+    switch(name) {
+      case 'add':
+        this.handleAddProductAction();
+        break;
+      case 'edit':
+        this.handleEditAction(id);
+        break;
+      case 'save':
+        this.handleSaveAction(id);
+        break;
+      case 'delete':
+        this.handleDeleteAction(id);
+        break;
+      case 'cancel':
+        this.handleCancelAction(id);
+        break;
+      default:
+        return;
+    }
+  }
+
 	render() {
     console.log('this.state', this.state);
 		return (
@@ -216,18 +238,21 @@ class ProductsManage extends React.Component {
           categoryOptions={this.categories}
           handleFilterAction={this.handleFillterAction}
           handleClearAction={this.handleClearAction}
-          handleChangeFilterValue={this.handleChangeFilterValue} />
+          handleChangeFilterValue={this.handleChangeFilterValue}
+        />
         <Button
           name="btn-add"
           className="btn-add"
           handleClick={this.handleAddProductAction}
-          label="Add New Product" />
+          label="Add New Product"
+        />
         <table className="products-table">
           <ProductListHeader
             handleSortClick={this.handleSortAction}
             headerColumns={this.columns}
             sortType={this.state.sortType}
-            sortBy={this.state.sortBy} />
+            sortBy={this.state.sortBy}
+          />
           <ProductList
             manufacturerOptions={this.manufacturers}
             categoryOptions={this.categories}
@@ -235,10 +260,8 @@ class ProductsManage extends React.Component {
             dataColumns={this.columns}
             productEditing={this.state.productEditing}
             handleChangeValueAction={this.handleChangeValueAction}
-            handleEditAction={this.handleEditAction}
-            handleSaveAction={this.handleSaveAction}
-            handleCancelAction={this.handleCancelAction}
-            handleDeleteAction={this.handleDeleteAction} />
+            handleButtonOnRow={this.handleButtonOnRow}
+          />
         </table>
       </div>
 		);

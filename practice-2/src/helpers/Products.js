@@ -1,5 +1,12 @@
 import _ from 'lodash';
-import {Columns, ProductListData, ManufacturersData, CategoriesData, DefaultProduct} from './../constants/DataObjects';
+
+import {
+  Columns,
+  ProductListData,
+  ManufacturersData,
+  CategoriesData,
+  DefaultProduct
+} from './../constants/DataObjects';
 
 const ProductHelpers = {
   loadProductList: function() {
@@ -7,15 +14,15 @@ const ProductHelpers = {
   },
 
   loadCategories: function() {
-    return CategoriesData
+    return CategoriesData;
   },
 
   loadManufacturers: function() {
-    return ManufacturersData
+    return ManufacturersData;
   },
 
   loadColumns: function() {
-    return Columns
+    return Columns;
   },
 
   findProductById: function(id, productList) {

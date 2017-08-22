@@ -39,13 +39,15 @@ class FilterProduct extends React.Component {
     switch (type){
       case 'input':
         element = (
-            <Input
-              name={name}
-              className={`filter-input ${'filter-' + name}`}
-              value={this.props.filterValue[name]}
-              handleChange={this.handleChangeFilterValue} />
-          );
+          <Input
+            name={name}
+            className={`filter-input ${'filter-' + name}`}
+            value={this.props.filterValue[name]}
+            handleChange={this.handleChangeFilterValue}
+          />
+        );
         break;
+
       case 'dropdown':
         element = (
           <DropdownSelect
@@ -53,9 +55,11 @@ class FilterProduct extends React.Component {
             className={`filter-dropdown ${'filter-' + name}`}
             options={this.props[name + 'Options']}
             value={this.props.filterValue[name]}
-            handleChange={this.handleChangeFilterValue} />
+            handleChange={this.handleChangeFilterValue}
+          />
         );
         break;
+
       default:
         element = null;
     }

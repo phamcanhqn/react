@@ -1,28 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import {ProductHelpers} from './../../helpers/Products';
 import ProductRow from './../product-row/ProductRow';
+
 import './style/ProductList.css';
 
 class ProductList extends React.Component {
-  handleEditAction = id => {
-    this.props.handleEditAction(id);
-  }
-
-  handleCancelAction = id => {
-    this.props.handleCancelAction(id);
-  }
-
-  handleDeleteAction = id => {
-    this.props.handleDeleteAction(id);
-  }
-
   handleChangeValueAction = (value, fieldName) => {
     this.props.handleChangeValueAction(value, fieldName);
   }
 
-  handleSaveAction = id => {
-    this.props.handleSaveAction(id);
+  handleButtonClickOnRow = (id, name) => {
+    this.props.handleButtonOnRow(id, name);
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return this.props.products !== nextProps.products ||
+      !ProductHelpers.compareObject(this.props.productEditing, nextProps.productEditing);
   }
 
 	render() {
@@ -50,11 +45,9 @@ class ProductList extends React.Component {
               dataColumns={this.props.dataColumns}
               manufacturerOptions={isEditMode ? this.props.manufacturerOptions : []}
               categoryOptions={isEditMode  ? this.props.categoryOptions : []}
-              handleButtonEdit={this.handleEditAction}
-              handleButtonSave={this.handleSaveAction}
-              handleButtonCancel={this.handleCancelAction}
-              handleButtonDelete={this.handleDeleteAction}
-              handleChangeValue={this.handleChangeValueAction} />
+              handleButtonClickOnRow={this.handleButtonClickOnRow}
+              handleChangeValue={this.handleChangeValueAction}
+            />
             );
           })
         }
@@ -66,17 +59,12 @@ class ProductList extends React.Component {
 ProductList.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
   productEditing: PropTypes.object,
-  handleEditAction: PropTypes.func.isRequired,
-  handleCancelAction: PropTypes.func,
-  handleDeleteAction: PropTypes.func.isRequired,
   handleChangeValueAction: PropTypes.func,
-  handleSaveAction: PropTypes.func
+  handleButtonClickOnRow: PropTypes.func
 };
 
 ProductList.defaultProps = {
   productEditing: {},
-  handleCancelAction: null,
-  handleChangeValueAction: null,
-  handleSaveAction: null
+  handleChangeValueAction: null
 };
 export default ProductList;

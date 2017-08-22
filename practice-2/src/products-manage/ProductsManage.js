@@ -194,9 +194,12 @@ class ProductsManage extends React.Component {
   */
   handleDeleteAction = id => {
     this.setState(preState => {
-      ProductHelpers.removeProduct(id, preState.products);
+      let products = preState.products.slice(0);
+
+      ProductHelpers.removeProduct(id, products);
+
       return {
-        products: preState.products
+        products
       }
     });
   }

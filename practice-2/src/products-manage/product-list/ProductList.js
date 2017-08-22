@@ -16,6 +16,9 @@ class ProductList extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
+    console.log('ooooo', this.props.products)
+    console.log('ooooo', nextProps.products)
+
     return this.props.products !== nextProps.products ||
       !ProductHelpers.compareObject(this.props.productEditing, nextProps.productEditing);
   }

@@ -34,6 +34,7 @@ class ProductList extends React.Component {
         </tbody>
       );
     }
+
 		return (
       <tbody>
         {this.props.products.map((product) => {

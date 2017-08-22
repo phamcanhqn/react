@@ -7,9 +7,7 @@ import {DropdownSelect} from './../../commons/dropdown-select/DropdownSelect';
 import './style/ProductCell.css';
 
 class ProductCell extends React.PureComponent {
-
   handleChangeValue = (event) => {
-    console.log("change value")
     const fieldName = event.target.getAttribute('name');
 
     this.props.handleChangeValue(event.target.value, fieldName);
@@ -75,8 +73,6 @@ class ProductCell extends React.PureComponent {
 
 
   render() {
-    console.log('vao cell===========');
-
     return (
       <td className={'product-'+ this.props.name + (this.props.isEditMode ? ' edit-mode' : '')}>
         {this.renderElementByType(this.props.elementType, this.props.name)}

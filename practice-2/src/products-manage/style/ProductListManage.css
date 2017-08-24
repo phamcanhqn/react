@@ -1,0 +1,10 @@
+.products-manage {
+  margin: 10px auto;
+  width: 1500px;
+}
+
+.btn-add {
+  float: left;
+  margin: 10px 0;
+  background-color: #36da60;
+}

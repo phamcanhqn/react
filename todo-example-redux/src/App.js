@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import TodoApp from './components/App'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import reducer from './reducers'
 import './App.css';
+
+const store = createStore(reducer)
 
 class App extends Component {
   render() {
@@ -11,10 +16,13 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>
-        <TodoApp />
+        <Provider store={store}>
+          <TodoApp />
+        </Provider>
+
       </div>
     );
   }
 }
 
-export default App;
+export default App

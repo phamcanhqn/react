@@ -38,7 +38,7 @@ const posts = (state = {
         isFetching: false,
         didInvalidate: false,
         items: action.posts,
-        lastUpdateed: action.receiveAt
+        lastUpdated: action.receivedAt
       }
     default: 
       return state

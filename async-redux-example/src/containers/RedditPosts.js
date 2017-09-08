@@ -13,9 +13,12 @@ class RedditApp extends Component {
     const { dispatch, selectedReddit} = this.props
     dispatch(fetchPostsIfNeeded(selectedReddit))
   }
-
-  componentWillReceicveProps(nextProps) {
+  
+  componentWillReceiveProps(nextProps) {
+    console.log('vaoooooooo')
+    
     if (nextProps.selectedReddit !== this.props.selectedReddit) {
+      console.log('vaoooooooo')
       const { dispatch, selectedReddit } = nextProps
       dispatch(fetchPostsIfNeeded(selectedReddit))
     }

@@ -2,14 +2,18 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import {
     BrowserRouter as Router,
-    Route
+    Route,
+    Switch
 } from 'react-router-dom'
 import TodoApp from './App'
 
 const Root = ({ store }) => (
     <Provider store={store}>
         <Router>
-            <Route path="/(:filter)" component={TodoApp} />
+            <Switch>
+                <Route path="/" exact component={TodoApp} />
+                <Route path="/:filter" component={TodoApp} />
+            </Switch>
         </Router>
     </Provider>
 )

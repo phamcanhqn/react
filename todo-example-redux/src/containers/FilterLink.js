@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { setVisibilityFilter } from '../actions'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 // const mapStateToProps = (state, ownProps) => ({
 // 	active: ownProps.filter === state.visibilityFilter
@@ -14,15 +14,15 @@ import { Link } from 'react-router-dom'
 // })
 
 const FilterLink = ({filter, children}) => (
-	<Link 
-		to={filter === 'SHOW_ALL' ? '/' : filter}
-		activeStyle={{
-			textDecoration: 'none',
-      		color: 'black'
-		}}
-	>
-		{children}
-	</Link>
+  <NavLink exact
+    to={filter === 'SHOW_ALL' ? '/' : '/'+ filter}
+    activeStyle={{
+      textDecoration: 'none',
+      color: 'black'
+    }}
+  >
+    {children}
+	</NavLink>
 )
 	
 export default FilterLink

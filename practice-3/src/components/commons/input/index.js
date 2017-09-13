@@ -4,34 +4,46 @@ import PropTypes from 'prop-types';
 import './style/Input.css';
 
 const Input = props => {
+  const handleBlur = event => {
+    if (!props.isRequire) return
+    const target = event.target
+    if(!target.value) {
+      target.focus()
+      target.style.borderColor = "red"
+    } else {
+      target.style.borderColor = "gray"
+    }
+  }
+
+  const handleChange = event => {
+    event.preventDefault()
+
+  }
+
 	return (
-		<input
+		<input 
+      ref={props.inputRef}
+      //value={props.value}
 			type={props.type}
 			name={props.name}
-			value={props.value}
 			className={props.className}
-			onChange={props.handleChange}
+			onBlur={handleBlur}
+      onChange={handleChange}
     />
 	);
 };
 
 Input.propTypes = {
+  inputRef: PropTypes.element,
+  value: PropTypes.string,
   type: PropTypes.string,
-  value: PropTypes.oneOfType(
-    [
-      PropTypes.string,
-      PropTypes.number
-    ]
-  ),
-  className: PropTypes.string,
-  handleChange: PropTypes.func
-
+  className: PropTypes.string
 }
 
 Input.defaultProps = {
-  type:'text',
+  inputRef: null,
   value: '',
-  handleChange: null,
+  type:'text',
   className: ''
 };
 

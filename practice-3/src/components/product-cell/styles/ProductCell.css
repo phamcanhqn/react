@@ -1,0 +1,28 @@
+td button {
+  display: none;
+}
+
+.product-action {
+  display: flex;
+  justify-content: space-around;
+}
+.product-action .btn-save,
+.product-action .btn-cancel {
+  display: none;
+}
+
+.product-action .btn-edit,
+.product-action .btn-delete {
+  display: block;
+}
+
+.product-action.edit-mode .btn-save,
+.product-action.edit-mode .btn-cancel {
+  display: block;
+}
+
+.product-action.edit-mode .btn-edit,
+.product-action.edit-mode .btn-delete {
+  display: none;
+}
+

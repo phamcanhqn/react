@@ -1,5 +1,6 @@
 select {
   padding: 5px;
+  outline: none;
 }
 
 .filter-dropdown {

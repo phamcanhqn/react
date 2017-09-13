@@ -6,10 +6,12 @@ import {DropdownSelect} from '../commons/dropdown-select';
 import {Button} from '../commons/button';
 import {ProductHelpers} from '../../helpers/Products';
 
-//import './styles/FilterProduct.css';
+import './styles/ProductFilter.css';
 
-const ProductFilter = ({}) => {
+const ProductFilter = (props) => {
   let filterForm
+  const manufacturers = ProductHelpers.loadManufacturers()
+  const categories = ProductHelpers.loadCategories()
 
   const handleFilterAction = (event) => {
     event.preventDefault();
@@ -17,6 +19,7 @@ const ProductFilter = ({}) => {
 
   const handleClearAction = (event) => {
     event.preventDefault()
+    filterForm.reset()
   }
 
   /*
@@ -32,8 +35,6 @@ const ProductFilter = ({}) => {
           <Input
             name={name}
             className={`filter-input ${'filter-' + name}`}
-            //value={this.props.filterValue[name]}
-            handleChange={this.handleChangeFilterValue}
           />
         );
         break;
@@ -43,10 +44,9 @@ const ProductFilter = ({}) => {
           <DropdownSelect
             name={name}
             className={`filter-dropdown ${'filter-' + name}`}
-            options={[]}
-            //options={this.props[name + 'Options']}
-            //value={this.props.filterValue[name]}
-            handleChange={null}
+            options={name === 'manufacturer' ? manufacturers : categories}
+            value={props.filterValue[name]}
+            //handleChange={null}
           />
         );
         break;
@@ -59,7 +59,7 @@ const ProductFilter = ({}) => {
   }
 
     return (
-      <form className="filter-form" ref={form => this.filterForm = form}>
+      <form className="filter-form" ref={form => filterForm = form}>
         <fieldset>
           <legend>Filter Products</legend>
             <div className="filter-value">
@@ -77,11 +77,13 @@ const ProductFilter = ({}) => {
             </div>
             <div className="filter-button">
               <Button
+                type="submit"
                 name="btn-filter"
                 className="btn"
                 handleClick={handleFilterAction}
                 label="Filter"/>
               <Button
+                type="button"
                 name="btn-clear"
                 className="btn"
                 handleClick={handleClearAction}

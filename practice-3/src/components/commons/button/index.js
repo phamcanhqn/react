@@ -5,7 +5,7 @@ import './style/Button.css'
 const Button = props => {
   return (
     <button
-      type="button"
+      type={props.Type}
       name={props.name}
       className={props.className}
       onClick={props.handleClick}>

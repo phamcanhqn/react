@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './style/SortIcon.css';
+import './styles/SortIcon.css';
 
 const SortIcon = props => {
 	return (
@@ -19,4 +19,4 @@ SortIcon.defaultProps = {
   className: ''
 };
 
-export {SortIcon};
+export { SortIcon };

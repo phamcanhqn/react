@@ -10,18 +10,39 @@ import './styles/ProductFilter.css';
 
 const ProductFilter = (props) => {
   let filterForm
+  const columns = ProductHelpers.loadColumns()
+  // let codeElement
+  // let nameElement
+  // let descriptionElement
+  // let categoryElement
+  // let manufacturerElement
+  // let quanityElement
+  // let priceElement
+
   const manufacturers = ProductHelpers.loadManufacturers()
   const categories = ProductHelpers.loadCategories()
 
-  const handleFilterAction = (event) => {
-    event.preventDefault();
+  const handleFilterAction = event => {
+    event.preventDefault()
+    const dataFilter = collectFilterData(filterForm)
+    console.log('dataFilter', dataFilter)
+    props.handleFilterAction(dataFilter)
   }
 
-  const handleClearAction = (event) => {
+  const handleClearAction = event => {
     event.preventDefault()
     filterForm.reset()
   }
 
+  const collectFilterData = form => {
+    let data={}
+    columns.map(col => {
+      data[col.name] = form[col.name].value
+    })
+    
+    return data
+  } 
+  
   /*
   * Render element with type and name
   * Return a element
@@ -34,7 +55,11 @@ const ProductFilter = (props) => {
         element = (
           <Input
             name={name}
+            //inputRef={input => `${name + 'Element'} = input`}
+            //value={`${name + 'Element'}.value`}
+            
             className={`filter-input ${'filter-' + name}`}
+            //handleChange={handleChangeFilterValue}
           />
         );
         break;
@@ -45,8 +70,8 @@ const ProductFilter = (props) => {
             name={name}
             className={`filter-dropdown ${'filter-' + name}`}
             options={name === 'manufacturer' ? manufacturers : categories}
-            value={props.filterValue[name]}
-            //handleChange={null}
+            value={props.filterData[name]}
+            //handleChange={handleChangeFilterValue}
           />
         );
         break;
@@ -63,7 +88,7 @@ const ProductFilter = (props) => {
         <fieldset>
           <legend>Filter Products</legend>
             <div className="filter-value">
-            { ProductHelpers.loadColumns().map((col) => {
+            { columns.map((col) => {
               if (!col.isAllowedFilter) return null;
 
                 return (

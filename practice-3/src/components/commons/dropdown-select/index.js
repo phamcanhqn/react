@@ -23,6 +23,7 @@ const DropdownSelect = props => {
       name={props.name}
       onChange={handleChange}
       className={props.className}>
+      <option value=""> --Select-- </option>
       {
         props.options.map(option => {
           return (

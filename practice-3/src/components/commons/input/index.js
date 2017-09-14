@@ -5,19 +5,14 @@ import './style/Input.css';
 
 const Input = props => {
   const handleBlur = event => {
-    if (!props.isRequire) return
+    //if (!props.isRequire) return
     const target = event.target
     if(!target.value) {
       target.focus()
-      target.style.borderColor = "red"
+      target.classList.add('input-error')
     } else {
-      target.style.borderColor = "gray"
+      target.classList.remove('input-error')
     }
-  }
-
-  const handleChange = event => {
-    event.preventDefault()
-
   }
 
 	return (
@@ -28,7 +23,7 @@ const Input = props => {
 			name={props.name}
 			className={props.className}
 			onBlur={handleBlur}
-      onChange={handleChange}
+      onChange={props.handleChange}
     />
 	);
 };

@@ -52,7 +52,7 @@ const ProductHelpers = {
 
   filterProducts: function(filterData, productList) {
     _.forOwn(filterData, function(value, key) {
-      if (value !== '') {
+      if (value) {
         productList = _.filter(productList, function(product) {
           return product[key].toString().indexOf(value) !== -1;
         });

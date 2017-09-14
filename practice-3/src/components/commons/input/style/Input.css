@@ -3,3 +3,7 @@ input {
   outline: none;
   border: 1px solid gray;
 }
+
+.input-error {
+  border-color: red;
+}

@@ -4,13 +4,25 @@ import PropTypes from 'prop-types';
 import './style/DropdownSelect.css'
 
 const DropdownSelect = props => {
+  const handleChange = event => {
+    //if (!props.isRequired) return
+    
+    let target = event.target
+
+    if (!target.value) {
+      target.style.borderColor = "red"
+    } else {
+      target.style.borderColor = "gray"
+    }
+  }
+  
   return (
     <select
-      value={props.value}
+      //value={props.value}
+      ref={props.selectRef}
       name={props.name}
-      onChange={props.handleChange}
+      onChange={handleChange}
       className={props.className}>
-      <option value=""> --Select-- </option>
       {
         props.options.map(option => {
           return (
@@ -27,21 +39,15 @@ const DropdownSelect = props => {
 };
 
 DropdownSelect.propTypes = {
+  selectRef: PropTypes.element,
   options: PropTypes.array.isRequired,
-  value: PropTypes.oneOfType(
-    [
-      PropTypes.string,
-      PropTypes.number
-    ]
-  ),
-  label: PropTypes.string,
   className: PropTypes.string,
   handleChange: PropTypes.func
 
 }
 
 DropdownSelect.defaultProps = {
-  value: '',
+  selectRef: null,
   handleChange: null,
   className: ''
 };

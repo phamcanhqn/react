@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {ProductHelpers} from './../../helpers/Products';
-import ProductItem from './../product-item';
+import VisibleProductItem from '../../containers/ProductItem';
 
 import './styles/ProductList.css';
 
@@ -30,17 +30,10 @@ class ProductList extends React.Component {
 		return (
       <tbody>
         {this.props.products.map((product) => {
-          const isEditMode = product.id === this.props.productEditing.id;
-          return (
-            <ProductItem
-              id={product.id}
-              //isEditMode={isEditMode}
-              key={product.id}
-              product={isEditMode ? productEditing : product}
-              handleButtonClickOnRow={this.handleButtonClickOnRow}
-              handleChangeValue={this.handleChangeValueAction}
-            />
-            );
+          //const isEditMode = product.id === this.props.productEditing.id;
+            return (
+              <VisibleProductItem product={product}/>
+            )
           })
         }
       </tbody>

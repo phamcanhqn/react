@@ -41,10 +41,12 @@ const ProductCell = props => {
       case 'input':
         element = (
           <Input
+            inputRef={props[name + 'Ref']}
             name={name}
-            type={(name === 'quantity' || name === 'price') && 'number'}
+            isRequired={true}
+            type={(name === 'quantity' || name === 'price') ? 'number' : 'text'}
             className={`value-input ${'input-' + name}`}
-            value={props.value}
+            //value={props.value}
           />
         );
         break;
@@ -52,10 +54,12 @@ const ProductCell = props => {
       case 'dropdown':
         element = (
           <DropdownSelect
+            selectRef={props[name + 'Ref']}
             name={name}
+            isRequired={true}
             className={`value-dropdown ${'input-' + name}`}
             options={name === 'manufacturer' ? manufacturers : categories}
-            value={props.value}
+            //value={props.value}
           />
         );
         break;

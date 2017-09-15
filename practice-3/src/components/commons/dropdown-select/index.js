@@ -5,7 +5,7 @@ import './style/DropdownSelect.css'
 
 const DropdownSelect = props => {
   const handleChange = event => {
-    //if (!props.isRequired) return
+    if (!props.isRequired) return
     
     let target = event.target
 
@@ -18,7 +18,6 @@ const DropdownSelect = props => {
   
   return (
     <select
-      //value={props.value}
       ref={props.selectRef}
       name={props.name}
       onChange={handleChange}
@@ -40,7 +39,7 @@ const DropdownSelect = props => {
 };
 
 DropdownSelect.propTypes = {
-  selectRef: PropTypes.element,
+  selectRef: PropTypes.func,
   options: PropTypes.array.isRequired,
   className: PropTypes.string,
   handleChange: PropTypes.func

@@ -5,6 +5,8 @@ const mapStateToProps = state => {
   return {products: state.products}
 }
 
-const VisibleProductList = connect(mapStateToProps)(ProductList)
+const VisibleProductList = connect(
+  mapStateToProps
+)(ProductList)
 
 export default VisibleProductList

@@ -156,7 +156,7 @@ const ProductListData = [
   }
 ];
 
-const DefaultProduct = {
+const EmptyProduct = {
   id: null,
   code: '',
   name: '',
@@ -172,5 +172,5 @@ export {
   ProductListData,
   ManufacturersData,
   CategoriesData,
-  DefaultProduct
+  EmptyProduct
 };

@@ -1,24 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
-import {Input} from '../commons/input';
-import {DropdownSelect} from '../commons/dropdown-select';
-import {Button} from '../commons/button';
-import {ProductHelpers} from '../../helpers/Products';
+import {Input} from '../commons/input'
+import {DropdownSelect} from '../commons/dropdown-select'
+import {Button} from '../commons/button'
+import {ProductHelpers} from '../../helpers/Products'
 
 import './styles/ProductFilter.css';
 
 const ProductFilter = (props) => {
   let filterForm
+  
   const columns = ProductHelpers.loadColumns()
-  // let codeElement
-  // let nameElement
-  // let descriptionElement
-  // let categoryElement
-  // let manufacturerElement
-  // let quanityElement
-  // let priceElement
-
   const manufacturers = ProductHelpers.loadManufacturers()
   const categories = ProductHelpers.loadCategories()
 
@@ -70,7 +63,7 @@ const ProductFilter = (props) => {
             name={name}
             className={`filter-dropdown ${'filter-' + name}`}
             options={name === 'manufacturer' ? manufacturers : categories}
-            value={props.filterData[name]}
+            //value={props.filterData[name]}
             //handleChange={handleChangeFilterValue}
           />
         );

@@ -5,17 +5,30 @@ import {
   CHANGE_PRODUCT_DATA,
   SAVE_PRODUCT,
   EDIT_PRODUCT,
-  DELETE_PRODUCT
+  DELETE_PRODUCT,
+  SORT_PRODUCT_LIST
 } from '../actions'
 
 const products = (state = [], action) => {
-  console.log('ffffffffffffffffff', state)
   switch (action.type) {
     case FILTER_PRODUCTS:
-      let a = state.slice(0)
-      return ProductHelpers.filterProducts(action.filterData, a)
+      let originalProducts = ProductHelpers.loadProductList()
+      return ProductHelpers.filterProducts(action.filterData, originalProducts)
+    case SORT_PRODUCT_LIST:
+      console.log(action)
+      return ProductHelpers.sortProductList(action.sortData, state)
     case ADD_PRODUCT:
-      return state.concat(action.product)
+      return ProductHelpers.addNewProduct(state.slice(0), {
+        ...action.product,
+        isEditMode: true
+      })
+    case EDIT_PRODUCT:
+      console.log('action.productId', action.productId)
+      const product = ProductHelpers.findProductById(action.productId, state)
+    
+      return ProductHelpers.saveProduct(state.slice(0), {...product, isEditMode: true})
+    case SAVE_PRODUCT:
+      return ProductHelpers.saveProduct(state.slice(0), {...action.product, isEditMode: false})
     case DELETE_PRODUCT:
       return ProductHelpers.removeProduct(action.productId)
     default:

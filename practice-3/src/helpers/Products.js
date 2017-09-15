@@ -5,10 +5,14 @@ import {
   ProductListData,
   ManufacturersData,
   CategoriesData,
-  DefaultProduct
+  EmptyProduct
 } from './../constants/DataObjects';
 
 const ProductHelpers = {
+  createEmptyProduct: function() {
+    return EmptyProduct
+  },
+
   loadProductList: function() {
     return ProductListData;
   },
@@ -37,11 +41,19 @@ const ProductHelpers = {
     });
   },
 
-  addEmptyProduct: function(productList) {
-    DefaultProduct.id = new Date().valueOf();
-    productList.push(DefaultProduct);
+  addNewProduct: function(productList, newProduct) {
+    newProduct.id = new Date().valueOf();
+    productList.push(newProduct);
 
-    return {newProductList: productList, product: DefaultProduct};
+    return productList;
+  },
+
+  saveProduct: function (productList, product) {
+    const index = this.findIndexProductById(product.id, productList)
+    console.log('index', index, product)
+    productList.splice(index, 1, product)
+    
+    return productList
   },
 
   removeProduct:function(id, productList){
@@ -62,7 +74,7 @@ const ProductHelpers = {
     return productList;
   },
 
-  sortProductList: function(sortBy, sortType, productList) {
+  sortProductList: function({ sortBy, sortType }, productList) {
     let productsSorted = _.sortBy(productList, function(product){
       return product[sortBy];
     });

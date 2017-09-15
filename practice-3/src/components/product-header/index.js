@@ -6,40 +6,60 @@ import { ProductHelpers } from '../../helpers/Products'
 
 import './styles/ProductHeader.css';
 
-class ProductHeader extends React.PureComponent {
-	handleSortClick = (event) => {
-    const sortBy = event.currentTarget.getAttribute('name');
-		this.props.handleSortClick(event.currentTarget, sortBy);
-	}
+const ProductHeader = props => {
+  /*
+  * Handle sort action on product list
+  * Check sort type and sort by field on product list and sorting products list
+  */
+	const handleSortClick = (event) => {
+    const currentTarget = event.currentTarget
+    const sortIcon = currentTarget.getElementsByClassName('sort-icon')[0]
+    const sortBy = currentTarget.getAttribute('name')
+    const sortType = checkSortType(sortIcon)
 
-	render() {
-		return (
-			<thead>
-				<tr>
-          {
-            ProductHelpers.loadColumns().map((col) => {
-              return (
-                <th
-                  key={col.name}
-                  className={col.name + "-column"}
-                  name={col.name}
-                  onClick={col.isAllowedSort ? this.handleSortClick : null}>
-                  <span className="header-title">
-                    {col.display}
-                    <SortIcon className={`sort-icon ${this.props.sortBy === col.name ? this.props.sortType : ""}`} />
-                  </span>
-                </th>
-              );
-            })
-          }
-				</tr>
-			</thead>
-		);
-	}
+		props.handleSortClick(sortBy, sortType)
+  }
+
+  /*
+  * Check sort type when user click on header of table
+  * Return sort type
+  */
+  const checkSortType = sortIcon => {
+    if (sortIcon.classList.contains('asc-sort')) {
+      return 'desc-sort';
+    }else if (sortIcon.classList.contains('desc-sort')) {
+      return null;
+    }else {
+      return 'asc-sort';
+    }
+  }
+
+
+  return (
+    <thead>
+      <tr>
+        {
+          ProductHelpers.loadColumns().map((col) => {
+            return (
+              <th
+                key={col.name}
+                className={col.name + "-column"}
+                name={col.name}
+                onClick={col.isAllowedSort ? handleSortClick : null}>
+                <span className="header-title">
+                  {col.display}
+                  <SortIcon className={`sort-icon ${props.sortBy === col.name ? props.sortType : ""}`} />
+                </span>
+              </th>
+            );
+          })
+        }
+      </tr>
+    </thead>
+  )
 }
 
 ProductHeader.propTypes = {
-  headerColumns: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleSortClick: PropTypes.func,
   sortType: PropTypes.string,
   sortBy: PropTypes.string

@@ -2,15 +2,26 @@ import { connect } from 'react-redux'
 import ProductItem from '../components/product-item'
 import { 
   saveProduct, 
-  editProduct 
+  editProduct,
+  cancelProduct,
+  deleteProduct
 } from '../actions'
 
 const mapDispatchToProps = dispatch => ({
-  handleSaveAction: (product) => {
+  handleSaveAction: product => {
     dispatch(saveProduct(product))
   },
-  handleEditAction: (productId) => {
+
+  handleEditAction: productId => {
     dispatch(editProduct(productId))
+  },
+
+  handleCancelAction: (productId) => {
+    dispatch(cancelProduct(productId))
+  },
+
+  handleDeleteAction: (productId) => {
+    dispatch(deleteProduct(productId))
   },
 })
 

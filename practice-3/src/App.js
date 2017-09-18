@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 // import VisibleProductFilter from './containers/ProductFilter'
 // // import ProductCell from './components/product-cell'

@@ -5,7 +5,8 @@ import {
   ProductListData,
   ManufacturersData,
   CategoriesData,
-  EmptyProduct
+  EmptyProduct,
+  updateProductData
 } from './../constants/DataObjects';
 
 const ProductHelpers = {
@@ -48,18 +49,26 @@ const ProductHelpers = {
     return productList;
   },
 
-  saveProduct: function (productList, product) {
+  updateProduct: function (productList, product) {
     const index = this.findIndexProductById(product.id, productList)
-    console.log('index', index, product)
+  
     productList.splice(index, 1, product)
-    
+
+    //update new data for product list
+    updateProductData(productList)
+
     return productList
   },
 
   removeProduct:function(id, productList){
-    return _.remove(productList, function(product) {
+    _.remove(productList, function(product) {
       return product.id === id;
-    });
+    })
+
+    //update new data for product list
+    updateProductData(productList)
+
+    return productList
   },
 
   filterProducts: function(filterData, productList) {

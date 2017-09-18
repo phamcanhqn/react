@@ -4,13 +4,12 @@ import ProductApp from '../reducers'
 import { ProductHelpers } from '../helpers/Products'
 
 const productsData = ProductHelpers.loadProductList()
+
 let INITIAL_STATE = {
-  //originalProducts: productsData,
   products: productsData,
-  //product: {},
-  sortData: {},
-  filterData: {}
-  }
+  sortData: {}
+}
+
 const storeDev = createStore(
   ProductApp, 
   INITIAL_STATE,

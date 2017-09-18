@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
 import ProductList from '../components/product-list'
 
-const mapStateToProps = state => {
-  return {products: state.products}
-}
+const mapStateToProps = state => ({ 
+  products: state.products 
+})
 
 const VisibleProductList = connect(
   mapStateToProps

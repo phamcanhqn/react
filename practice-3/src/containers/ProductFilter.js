@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import ProductFilter from '../components/product-filter'
-import { changeFilterData } from '../actions'
 import { filterProducts } from '../actions'
 // const mapStateToProps = state => {
 //   console.log('fffffffffffffffffffffff', state)

@@ -51,14 +51,16 @@ const ProductHelpers = {
   },
 
   updateProduct: (productList, product) => {
-    const index = _.findIndex(productList,productItem => {
+    const index = _.findIndex(productList, productItem => {
       return product.id === productItem.id
     })
   
     productList.splice(index, 1, product)
 
     //update new data for product list
-    updateProductData(productList)
+    if (!product.isEditMode) {
+      updateProductData(productList)
+    }
 
     return productList
   },

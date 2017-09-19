@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 
-import { Input } from '../commons/input'
-import { DropdownSelect } from '../commons/dropdown-select'
-import { Button } from '../commons/button'
-import { ProductHelpers } from '../../helpers/Products'
+import { Input } from 'pages/commons/input'
+import { DropdownSelect } from 'pages/commons/dropdown-select'
+import { Button } from 'pages/commons/button'
+import { ProductHelpers } from 'helpers/Products'
 
 import './styles/ProductFilter.css'
 

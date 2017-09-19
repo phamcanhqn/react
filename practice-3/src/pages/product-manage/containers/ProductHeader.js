@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
-import ProductHeader from '../components/product-header'
-import { sortProductList } from '../actions'
+
+import ProductHeader from 'pages/product-manage/components/product-header'
+import { sortProductList } from 'pages/product-manage/actions'
 
 const mapStateToProps = state => ({
   ...state.sortData

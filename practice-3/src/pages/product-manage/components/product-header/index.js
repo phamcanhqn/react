@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { SortIcon } from '../commons/sort-icon'
-import { ProductHelpers } from '../../helpers/Products'
+import { SortIcon } from 'pages/commons/sort-icon'
+import { ProductHelpers } from 'helpers/Products'
 
 import './styles/ProductHeader.css'
 

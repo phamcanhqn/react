@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import ProductRow from '../../containers/ProductItem';
+import ProductRow from 'pages/product-manage/containers/ProductItem'
 
 import './styles/ProductList.css'
 

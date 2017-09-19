@@ -1,12 +1,12 @@
 import React from 'react'
 
-import { ProductHelpers } from '../helpers/Products'
+import { ProductHelpers } from 'helpers/Products'
 
-import ProductFilterForm from '../containers/ProductFilter'
-import TableHeaderProduct from '../containers/ProductHeader'
-import TableBodyProduct from '../containers/ProductList'
+import ProductFilterForm from 'pages/product-manage/containers/ProductFilter'
+import TableHeaderProduct from 'pages/product-manage/containers/ProductHeader'
+import ProductList from 'pages/product-manage/components/product-list'
 
-import { Button } from './commons/button'
+import { Button } from 'pages/commons/button'
 
 import './styles/ProductApp.css'
 
@@ -30,7 +30,7 @@ const ProductApp = (props) => {
 
       <table className="products-table">
         <TableHeaderProduct />
-        <TableBodyProduct />
+        <ProductList products={props.products} />
       </table>
     </div>
   )

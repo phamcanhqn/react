@@ -8,7 +8,7 @@ import {
   EDIT_PRODUCT,
   DELETE_PRODUCT,
   SORT_PRODUCT_LIST
-} from '../actions'
+} from '../pages/product-manage/actions'
 
 const products = (state = [], action) => {
   let originalProducts = ProductHelpers.loadProductList()
@@ -32,24 +32,24 @@ const products = (state = [], action) => {
     
     // Handle edit product action
     case EDIT_PRODUCT:
-      const product = ProductHelpers.findProductById(action.productId, state)
+      const product = ProductHelpers.findProductById(action.productId, originalProducts)
       return ProductHelpers.updateProduct(state.slice(0), {...product, isEditMode: true})
     
     // Handle save action
     case SAVE_PRODUCT:
-      return ProductHelpers.updateProduct(state.slice(0), action.product)
+      return ProductHelpers.updateProduct(originalProducts.slice(0), action.product)
     
     // Handle cancel action  
     case CANCEL_PRODUCT:
       const productEditing = ProductHelpers.findProductById(action.productId, state)
 
       return productEditing.isNewProduct ? 
-        ProductHelpers.removeProduct(action.productId, state.slice(0)) : 
-        ProductHelpers.updateProduct(state.slice(0), {...productEditing, isEditMode: false})
+        ProductHelpers.removeProduct(action.productId, originalProducts.slice(0)) : 
+        ProductHelpers.updateProduct(originalProducts.slice(0), {...productEditing, isEditMode: false})
     
     // Handle delete action
     case DELETE_PRODUCT:
-      return ProductHelpers.removeProduct(action.productId, state.slice(0))
+      return ProductHelpers.removeProduct(action.productId, originalProducts.slice(0))
 
     default:
       return state

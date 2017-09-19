@@ -1,6 +1,11 @@
 import { connect } from 'react-redux'
-import ProductApp from '../components'
-import { addProduct } from '../actions'
+
+import ProductApp from 'pages/product-manage/components'
+import { addProduct } from 'pages/product-manage/actions'
+
+const mapStateToProps = state => ({
+  products: state.products
+})
 
 const mapDispatchToProps = dispatch => ({
   handleAddProductAction: newProduct => {
@@ -9,7 +14,7 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const ProductAppManage = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(ProductApp)
 

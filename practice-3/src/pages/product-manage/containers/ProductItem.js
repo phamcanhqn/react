@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import ProductItem from '../components/product-item'
+import ProductItem from 'pages/product-manage/components/product-item'
 import { 
   saveProduct, 
   editProduct,

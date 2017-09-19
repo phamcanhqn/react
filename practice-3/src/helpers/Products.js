@@ -31,16 +31,16 @@ const ProductHelpers = {
     return Columns
   },
 
-  findProductById: function(id, productList) {
-    return _.find(productList, function(product) {
-      return product.id === id;
-    });
+  findProductById: (id, productList) => {
+    return _.find(productList, product => {
+      return product.id === id
+    })
   },
 
   findIndexProductById: (id, productList) => {
-    return _.findIndex(productList, function(product) {
+    return _.findIndex(productList, product => {
       return product.id === id
-    });
+    })
   },
 
   addNewProduct: (productList, newProduct) => {
@@ -51,7 +51,9 @@ const ProductHelpers = {
   },
 
   updateProduct: (productList, product) => {
-    const index = this.findIndexProductById(product.id, productList)
+    const index = _.findIndex(productList,productItem => {
+      return product.id === productItem.id
+    })
   
     productList.splice(index, 1, product)
 
@@ -62,7 +64,7 @@ const ProductHelpers = {
   },
 
   removeProduct: (id, productList) => {
-    _.remove(productList, function(product) {
+    _.remove(productList, product => {
       return product.id === id
     })
 
@@ -73,9 +75,9 @@ const ProductHelpers = {
   },
 
   filterProducts: (filterData, productList) => {
-    _.forOwn(filterData, function(value, key) {
+    _.forOwn(filterData, (value, key) => {
       if (value) {
-        productList = _.filter(productList, function(product) {
+        productList = _.filter(productList, product=> {
           return product[key].toString().indexOf(value) !== -1;
         })
       }
@@ -85,7 +87,7 @@ const ProductHelpers = {
   },
 
   sortProductList: ({ sortBy, sortType }, productList) => {
-    let productsSorted = _.sortBy(productList, function(product){
+    let productsSorted = _.sortBy(productList, product => {
       return product[sortBy]
     })
 

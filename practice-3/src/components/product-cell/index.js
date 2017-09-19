@@ -8,15 +8,17 @@ import {ProductHelpers} from '../../helpers/Products'
 import './styles/ProductCell.css';
 
 const ProductCell = props => {
+  // Get data for dropdown
   const manufacturers = ProductHelpers.loadManufacturers();
   const categories = ProductHelpers.loadCategories();
 
   const handleClickButton = (id, name) => {
     props.cellActions.handleButtonClick(id, name);
   }
-
+  
   const renderButton = (name, label, productId) => {
-    let handleClick = handleClickButton.bind(this, productId, name);
+    let handleClick = handleClickButton.bind(this, productId, name)
+
     return (
       <Button
         name={'btn-' + name}
@@ -26,10 +28,12 @@ const ProductCell = props => {
       />
     );
   }
-
-  /*
-  * Render element with type and name
-  * Return a element
+  
+  /**
+   * Render element with type and name
+   * @param {String} type
+   * @param {String} name
+   * @return {Element} React Element
   */
   const renderElementByType = (type, name) => {
     let element;
@@ -41,8 +45,10 @@ const ProductCell = props => {
       case 'input':
         element = (
           <Input
+            inputRef={props[name + 'Ref']}
             name={name}
-            type={(name === 'quantity' || name === 'price') && 'number'}
+            isRequired={true}
+            type={(name === 'quantity' || name === 'price') ? 'number' : 'text'}
             className={`value-input ${'input-' + name}`}
             value={props.value}
           />
@@ -52,7 +58,9 @@ const ProductCell = props => {
       case 'dropdown':
         element = (
           <DropdownSelect
+            selectRef={props[name + 'Ref']}
             name={name}
+            isRequired={true}
             className={`value-dropdown ${'input-' + name}`}
             options={name === 'manufacturer' ? manufacturers : categories}
             value={props.value}
@@ -66,15 +74,24 @@ const ProductCell = props => {
 
     return element;
   }
-  return (
-    <td className={'product-'+ props.cellAttributes.name + (props.cellAttributes.isEditMode ? ' edit-mode' : '')}>
-      {renderElementByType(props.cellAttributes.elementType, props.cellAttributes.name)}
-      {props.cellAttributes.name === 'action' && renderButton('save', 'Save',props.cellData.productId)}
-      {props.cellAttributes.name === 'action' && renderButton('edit', 'Edit', props.cellData.productId)}
-      {props.cellAttributes.name === 'action' && renderButton('cancel', 'Cancel', props.cellData.productId)}
-      {props.cellAttributes.name === 'action' && renderButton('delete', 'Delete', props.cellData.productId)}
-    </td>
-  )
+
+  // Check render button for cell. If action cell then render button else render normal element
+  if (props.cellAttributes.name === 'action') {
+    return (
+      <td className={props.cellAttributes.name + '-column ' + (props.cellAttributes.isEditMode ? ' edit-mode' : '')}>
+        {props.cellAttributes.isEditMode && renderButton('save', 'Save',props.cellData.productId) }
+        {props.cellAttributes.isEditMode && renderButton('cancel', 'Cancel', props.cellData.productId) }
+        {!props.cellAttributes.isEditMode && renderButton('edit', 'Edit', props.cellData.productId) }
+        {!props.cellAttributes.isEditMode && renderButton('delete', 'Delete', props.cellData.productId) }
+      </td>
+    )
+  } else {
+    return (
+      <td className={props.cellAttributes.name + '-column ' + (props.cellAttributes.isEditMode ? ' edit-mode' : '')}>
+        {renderElementByType(props.cellAttributes.elementType, props.cellAttributes.name)}
+      </td>
+    )
+  }
 }
 
 export default ProductCell;

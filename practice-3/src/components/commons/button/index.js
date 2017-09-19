@@ -1,20 +1,24 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
+
 import './style/Button.css'
 
-const Button = props => {
-  return (
-    <button
-      type={props.Type}
-      name={props.name}
-      className={props.className}
-      onClick={props.handleClick}>
-      {props.label}
-    </button>
-  );
-}
+/**
+ * @return {Object} button control
+*/
+const Button = props => (
+  <button
+    type={props.type}
+    name={props.name}
+    className={props.className}
+    onClick={props.handleClick}
+  >
+    {props.label}
+  </button>
+)
 
 Button.propTypes = {
+  type: PropTypes.string,
   name: PropTypes.string,
   className: PropTypes.string,
   label: PropTypes.string.isRequired,
@@ -22,8 +26,9 @@ Button.propTypes = {
 }
 
 Button.defaultProps = {
+  type: 'button',
   name: '',
   className: ''
-};
+}
 
-export { Button };
+export { Button }

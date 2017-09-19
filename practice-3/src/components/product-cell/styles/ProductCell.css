@@ -1,28 +1,27 @@
-td button {
+.action-column button {
   display: none;
 }
 
-.product-action {
+.action-column {
   display: flex;
   justify-content: space-around;
 }
-.product-action .btn-save,
-.product-action .btn-cancel {
+.action-column .btn-save, .btn-cancel {
   display: none;
 }
 
-.product-action .btn-edit,
-.product-action .btn-delete {
+.action-column .btn-edit,
+.action-column .btn-delete {
   display: block;
 }
 
-.product-action.edit-mode .btn-save,
-.product-action.edit-mode .btn-cancel {
+.action-column.edit-mode .btn-save,
+.action-column.edit-mode .btn-cancel {
   display: block;
 }
 
-.product-action.edit-mode .btn-edit,
-.product-action.edit-mode .btn-delete {
+.action-column.edit-mode .btn-edit,
+.action-column.edit-mode .btn-delete {
   display: none;
 }
 

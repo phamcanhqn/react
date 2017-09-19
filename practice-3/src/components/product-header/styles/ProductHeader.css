@@ -5,5 +5,5 @@ th {
 .header-title {
 	display: flex;
   position: relative;
-  padding-left: 10px;
+  padding: 10px;
 }

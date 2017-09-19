@@ -103,7 +103,7 @@ const Columns = [
   }
 ];
 
-const ProductListData = [
+let ProductListData = [
   {
     id: 1502683724901,
     code: 'SM0003515',
@@ -156,7 +156,7 @@ const ProductListData = [
   }
 ];
 
-const DefaultProduct = {
+const EmptyProduct = {
   id: null,
   code: '',
   name: '',
@@ -167,10 +167,16 @@ const DefaultProduct = {
   quantity: null
 }
 
+
+const updateProductData = products => {
+  ProductListData = products
+}
+
 export {
   Columns,
   ProductListData,
   ManufacturersData,
   CategoriesData,
-  DefaultProduct
+  EmptyProduct,
+  updateProductData
 };

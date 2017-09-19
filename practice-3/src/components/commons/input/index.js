@@ -4,8 +4,13 @@ import PropTypes from 'prop-types';
 import './style/Input.css';
 
 const Input = props => {
+  /**
+   * Handle blur action on textbox
+   * Highlight if value of textbox is empty
+   * @param event
+  */
   const handleBlur = event => {
-    //if (!props.isRequire) return
+    if (!props.isRequired) return
     const target = event.target
     if(!target.value) {
       target.focus()
@@ -15,10 +20,13 @@ const Input = props => {
     }
   }
 
-	return (
-		<input 
+  /**
+   * @return {Object} Dropdown control
+  */
+  return (
+    <input 
       ref={props.inputRef}
-      //value={props.value}
+      defaultValue={props.value}
 			type={props.type}
 			name={props.name}
 			className={props.className}
@@ -29,7 +37,7 @@ const Input = props => {
 };
 
 Input.propTypes = {
-  inputRef: PropTypes.element,
+  inputRef: PropTypes.func,
   value: PropTypes.string,
   type: PropTypes.string,
   className: PropTypes.string
@@ -38,7 +46,7 @@ Input.propTypes = {
 Input.defaultProps = {
   inputRef: null,
   value: '',
-  type:'text',
+  type: 'text',
   className: ''
 };
 

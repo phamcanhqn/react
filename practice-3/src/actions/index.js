@@ -1,8 +1,6 @@
 export const FILTER_PRODUCTS = 'FILTER_PRODUCT'
-export const CHANGE_FILTER_DATA = 'CHANGE_FILTER_DATA'
-
 export const ADD_PRODUCT = 'ADD_PRODUCT'
-export const CHANGE_PRODUCT_DATA = 'CHANGE_PRODUCT_DATA'
+export const CANCEL_PRODUCT = 'CANCEL_PRODUCT'
 export const SAVE_PRODUCT = 'SAVE_PRODUCT'
 export const EDIT_PRODUCT = 'EDIT_PRODUCT'
 export const DELETE_PRODUCT = 'DELETE_PRODUCT'
@@ -14,22 +12,9 @@ export const filterProducts = filterData => ({
   filterData
 })
 
-export const changeFilterData = (fieldName, newValue) => ({
-  type: CHANGE_FILTER_DATA,
-  fieldName,
-  newValue
-})
-
 export const addProduct = product => ({
   type: ADD_PRODUCT,
   product
-})
-
-export const changeProductData = (product, fieldName, newValue) => ({
-  type: CHANGE_PRODUCT_DATA,
-  product,
-  fieldName,
-  newValue
 })
 
 export const saveProduct = product => ({
@@ -44,6 +29,11 @@ export const editProduct = productId => ({
 
 export const deleteProduct = productId => ({
   type: DELETE_PRODUCT,
+  productId
+})
+
+export const cancelProduct = productId => ({
+  type: CANCEL_PRODUCT,
   productId
 })
 

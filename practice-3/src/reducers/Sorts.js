@@ -4,13 +4,14 @@ import {
 
 const sortData = (state = {}, action) => {
   switch (action.type) {
+    // Handle sort action
     case SORT_PRODUCT_LIST:
       return {
         ...action.sortData
       }
       
     default:
-      return state;
+      return state
   }
 }
 

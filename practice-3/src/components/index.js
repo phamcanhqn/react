@@ -2,9 +2,9 @@ import React from 'react'
 
 import { ProductHelpers } from '../helpers/Products'
 
-import VisibleProductFilter from '../containers/ProductFilter'
-import VisibleHeader from '../containers/ProductHeader'
-import VisibleProductList from '../containers/ProductList'
+import ProductFilterForm from '../containers/ProductFilter'
+import TableHeaderProduct from '../containers/ProductHeader'
+import TableBodyProduct from '../containers/ProductList'
 
 import { Button } from './commons/button'
 
@@ -19,7 +19,7 @@ const ProductApp = (props) => {
     <div className="products-manage">
       <h2 className="products-title">Product List Management</h2>
       
-      <VisibleProductFilter />
+      <ProductFilterForm />
 
       <Button
         name="btn-add"
@@ -29,8 +29,8 @@ const ProductApp = (props) => {
       />
 
       <table className="products-table">
-        <VisibleHeader />
-        <VisibleProductList />
+        <TableHeaderProduct />
+        <TableBodyProduct />
       </table>
     </div>
   )

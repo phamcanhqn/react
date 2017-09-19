@@ -1,41 +1,33 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import VisibleProductItem from '../../containers/ProductItem';
+import ProductRow from '../../containers/ProductItem';
 
-import './styles/ProductList.css';
+import './styles/ProductList.css'
 
 const ProductList = props => {
-    if (!props.products.length) {
-      return (
-        <tbody>
-          <tr>
-            <td colSpan="8">No data found</td>
-          </tr>
-        </tbody>
-      );
-    }
-    
-    return (
-      <tbody>
-        { 
-          props.products.map((product) => {
-            return <VisibleProductItem key={product.id} product={product}/>
-          })
-        }
-      </tbody>
-    )
+  return (
+    <tbody>
+      {
+        !props.products.length && 
+        <tr>
+          <td colSpan="8" className="no-found-message">No data found</td>
+        </tr>
+      }
+      { 
+        props.products.map((product) => {
+          return <ProductRow key={product.id} product={product}/>
+        })
+      }
+    </tbody>
+  )
 }
 
 ProductList.propTypes = {
-  products: PropTypes.arrayOf(PropTypes.object).isRequired,
-  productEditing: PropTypes.object,
-  handleChangeValueAction: PropTypes.func,
-  handleButtonClickOnRow: PropTypes.func
-};
+  products: PropTypes.arrayOf(PropTypes.object)
+}
 
 ProductList.defaultProps = {
-  productEditing: {},
-  handleChangeValueAction: null
-};
+  products: []
+}
 export default ProductList

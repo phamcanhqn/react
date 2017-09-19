@@ -5,8 +5,8 @@ const mapStateToProps = state => ({
   products: state.products 
 })
 
-const VisibleProductList = connect(
+const TableBodyProduct = connect(
   mapStateToProps
 )(ProductList)
 
-export default VisibleProductList
+export default TableBodyProduct

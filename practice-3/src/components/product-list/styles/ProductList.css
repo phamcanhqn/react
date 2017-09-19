@@ -14,3 +14,8 @@
   width: 100%;
 	border-collapse: collapse;
 }
+
+.no-found-message {
+  text-align: center;
+  padding: 10px 0;
+}

@@ -22,12 +22,12 @@ const mapDispatchToProps = dispatch => ({
 
   handleDeleteAction: (productId) => {
     dispatch(deleteProduct(productId))
-  },
+  }
 })
 
-const VisibleProductItem = connect(
+const ProductRow = connect(
   null,
   mapDispatchToProps
 )(ProductItem)
 
-export default VisibleProductItem
+export default ProductRow

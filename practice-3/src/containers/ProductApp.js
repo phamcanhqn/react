@@ -7,6 +7,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(addProduct(newProduct))
   }
 })
+
 const ProductAppManage = connect(
   null,
   mapDispatchToProps

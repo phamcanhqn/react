@@ -102,15 +102,18 @@ class ProductItem extends React.Component {
       <tr className="product-item">
         {
           this.columns.map(col => {
+            // Get cell attributes
             const cellAttributes = {
               ...col,
               isEditMode: this.props.product.isEditMode
             }
-  
+            
+            // Get cell data
             const cellData = {
               productId: this.props.product.id
             }
-  
+            
+            // Get cell actions
             const cellActions = {
               handleButtonClick: this.handleClickButton
             }

@@ -12,9 +12,9 @@ const mapDispatchToProps = dispatch => ({
   }
 })
 
-const VisibleHeader = connect(
+const TableHeaderProduct = connect(
   mapStateToProps,
   mapDispatchToProps
 )(ProductHeader)
 
-export default VisibleHeader
+export default TableHeaderProduct

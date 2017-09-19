@@ -1,3 +1,4 @@
+// Make initial data for manufacturer dropdown
 const ManufacturersData = [
   {
     id: 1,
@@ -19,8 +20,9 @@ const ManufacturersData = [
     value: 'htc',
     label: 'HTC'
   }
-];
+]
 
+// Make initial data for Category dropdown
 const CategoriesData = [
   {
     id: 1,
@@ -42,8 +44,10 @@ const CategoriesData = [
     value: 'accessories',
     label: 'Accessories'
   }
-];
+]
 
+
+// Make initial data for Columns using for table and filter form
 const Columns = [
   {
     name: 'code',
@@ -101,8 +105,9 @@ const Columns = [
     isAllowedSort: false,
     isAllowedFilter: false,
   }
-];
+]
 
+// Make initial data for products list
 let ProductListData = [
   {
     id: 1502683724901,
@@ -154,8 +159,9 @@ let ProductListData = [
     price: 500,
     quantity: 100
   }
-];
+]
 
+// Make initial data for new product
 const EmptyProduct = {
   id: null,
   code: '',
@@ -167,7 +173,7 @@ const EmptyProduct = {
   quantity: null
 }
 
-
+// Update data of product list 
 const updateProductData = products => {
   ProductListData = products
 }
@@ -179,4 +185,4 @@ export {
   CategoriesData,
   EmptyProduct,
   updateProductData
-};
+}

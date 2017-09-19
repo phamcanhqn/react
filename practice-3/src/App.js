@@ -4,7 +4,7 @@ import './App.css';
 // // import ProductCell from './components/product-cell'
 // import ProductApp from './components'
 // import VisibleHeader from './containers/ProductHeader'
-import ProductAppManage from './containers/ProductApp'
+import ProductAppManage from './pages/product-manage/containers/ProductApp'
 
 import { Provider } from 'react-redux'
 import store from './store/configureStore'

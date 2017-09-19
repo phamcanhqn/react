@@ -1,9 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import {ProductHelpers} from '../../helpers/Products'
-import ProductCell from '../product-cell'
+import {ProductHelpers} from 'helpers/Products'
+import ProductCell from 'pages/product-manage/components/product-cell'
+
 import './styles/ProductItem.css'
+
 import { visualizeRender } from 'react-global-render-visualizer'
 
 if (process.env.NODE_ENV !== 'production') {
@@ -14,17 +16,6 @@ if (process.env.NODE_ENV !== 'production') {
 class ProductItem extends React.Component {
   // Get columns data 
   columns = ProductHelpers.loadColumns()
-
-  // Define refProps use for product cell
-  refProps = {
-    codeRef: el => {this.codeElement = el},
-    nameRef: el => {this.nameElement = el},
-    descriptionRef: el => {this.descriptionElement = el},
-    categoryRef: el => {this.categoryElement = el},
-    manufacturerRef: el => {this.manufacturerElement = el},
-    quantityRef: el => {this.quantityElement = el},
-    priceRef: el => {this.priceElement = el}
-  }
 
   /**
    * Check sort type when user click on header of table
@@ -88,7 +79,7 @@ class ProductItem extends React.Component {
 
           //highlight required field and focus on it
           element.focus()
-          element.style.borderColor = 'red'
+          element.classList.add('input-error')
 
           return false
         }
@@ -120,8 +111,8 @@ class ProductItem extends React.Component {
 
             return (
               <ProductCell
-                {...this.refProps}
                 key={col.name}
+                refElement={el => {this[col.name + 'Element'] = el}}
                 cellAttributes={cellAttributes}
                 cellData={cellData}
                 cellActions={cellActions}

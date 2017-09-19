@@ -15,9 +15,9 @@ const DropdownSelect = props => {
     let target = event.target
 
     if (!target.value) {
-      target.style.borderColor = "red"
+      target.classList.add('input-error')
     } else {
-      target.style.borderColor = "gray"
+      target.classList.remove('input-error')
     }
   }
   

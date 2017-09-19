@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { Input } from '../commons/input/';
-import { Button } from '../commons/button/';
-import { DropdownSelect } from '../commons/dropdown-select/';
-import {ProductHelpers} from '../../helpers/Products'
+import { Input } from 'pages/commons/input/'
+import { Button } from 'pages/commons/button/'
+import { DropdownSelect } from 'pages/commons/dropdown-select/'
+import { ProductHelpers } from 'helpers/Products'
 
 import './styles/ProductCell.css';
 
@@ -36,37 +36,37 @@ const ProductCell = props => {
    * @return {Element} React Element
   */
   const renderElementByType = (type, name) => {
-    let element;
+    let element
     if (!props.cellAttributes.isEditMode) {
-      return props.value;
+      return props.value
     }
 
     switch (type){
       case 'input':
         element = (
           <Input
-            inputRef={props[name + 'Ref']}
+            inputRef={props.refElement}
             name={name}
             isRequired={true}
             type={(name === 'quantity' || name === 'price') ? 'number' : 'text'}
             className={`value-input ${'input-' + name}`}
             value={props.value}
           />
-        );
-        break;
+        )
+        break
 
       case 'dropdown':
         element = (
           <DropdownSelect
-            selectRef={props[name + 'Ref']}
+            selectRef={props.refElement}
             name={name}
             isRequired={true}
             className={`value-dropdown ${'input-' + name}`}
             options={name === 'manufacturer' ? manufacturers : categories}
             value={props.value}
           />
-        );
-        break;
+        )
+        break
 
       default:
         element = null;

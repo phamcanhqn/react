@@ -10,24 +10,25 @@ import {
 } from './../constants/DataObjects';
 
 const ProductHelpers = {
-  createEmptyProduct: function() {
+  // Create an empty product
+  createEmptyProduct: () => {
     return EmptyProduct
   },
 
-  loadProductList: function() {
-    return ProductListData;
+  loadProductList: () => {
+    return ProductListData
   },
 
-  loadCategories: function() {
+  loadCategories: () => {
     return CategoriesData;
   },
 
-  loadManufacturers: function() {
-    return ManufacturersData;
+  loadManufacturers: () => {
+    return ManufacturersData
   },
 
-  loadColumns: function() {
-    return Columns;
+  loadColumns: () => {
+    return Columns
   },
 
   findProductById: function(id, productList) {
@@ -36,20 +37,20 @@ const ProductHelpers = {
     });
   },
 
-  findIndexProductById: function(id, productList) {
+  findIndexProductById: (id, productList) => {
     return _.findIndex(productList, function(product) {
-      return product.id === id;
+      return product.id === id
     });
   },
 
-  addNewProduct: function(productList, newProduct) {
-    newProduct.id = new Date().valueOf();
-    productList.push(newProduct);
+  addNewProduct: (productList, newProduct) => {
+    newProduct.id = new Date().valueOf()
+    productList.push(newProduct)
 
-    return productList;
+    return productList
   },
 
-  updateProduct: function (productList, product) {
+  updateProduct: (productList, product) => {
     const index = this.findIndexProductById(product.id, productList)
   
     productList.splice(index, 1, product)
@@ -60,9 +61,9 @@ const ProductHelpers = {
     return productList
   },
 
-  removeProduct:function(id, productList){
+  removeProduct: (id, productList) => {
     _.remove(productList, function(product) {
-      return product.id === id;
+      return product.id === id
     })
 
     //update new data for product list
@@ -71,39 +72,39 @@ const ProductHelpers = {
     return productList
   },
 
-  filterProducts: function(filterData, productList) {
+  filterProducts: (filterData, productList) => {
     _.forOwn(filterData, function(value, key) {
       if (value) {
         productList = _.filter(productList, function(product) {
           return product[key].toString().indexOf(value) !== -1;
-        });
+        })
       }
-    });
+    })
 
-    return productList;
+    return productList
   },
 
-  sortProductList: function({ sortBy, sortType }, productList) {
+  sortProductList: ({ sortBy, sortType }, productList) => {
     let productsSorted = _.sortBy(productList, function(product){
-      return product[sortBy];
-    });
+      return product[sortBy]
+    })
 
-    return sortType === 'asc-sort' ? productsSorted : productsSorted.reverse();
+    return sortType === 'asc-sort' ? productsSorted : productsSorted.reverse()
   },
 
-  updateDataObject: function(newValue, fieldName, curObject) {
+  updateDataObject: (newValue, fieldName, curObject) => {
     if (newValue) {
       curObject[fieldName] = newValue
     } else {
-      curObject = _.omit(curObject, fieldName);
+      curObject = _.omit(curObject, fieldName)
     }
 
-    return curObject;
+    return curObject
   },
 
-  compareObject: function(firstObject, secondObject) {
+  compareObject: (firstObject, secondObject) => {
     return _.isEqual(firstObject, secondObject);
   }
 }
 
-export {ProductHelpers};
+export {ProductHelpers}

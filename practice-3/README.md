@@ -1,6 +1,7 @@
 # Create Products Management App using React and Redux
 ## Timeline 
  * 5 days
+
 ## Target
  * Refresh basic React knowledge
  * Know how to build structure for React-Redux app
@@ -23,6 +24,8 @@ mkdir react-redux-practice-3
 cd react-redux-practice-3
 
 git clone git@gitlab.asoft-python.com:g-canhpham/react-training.git
+
+cd react-training
 
 git checkout -b feature/practice-3
 

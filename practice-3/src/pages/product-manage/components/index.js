@@ -26,15 +26,12 @@ const ProductApp = (props) => {
         className="btn-add"
         handleClick={handleAddProductAction}
         label="Add New Product"
+      />>
+      <ProductList 
+        products={props.products} 
+        sortData={props.sortData} 
+        handleSortClick={props.handleSortClick}
       />
-
-      <table className="products-table">
-        <ProductList 
-          products={props.products} 
-          sortData={props.sortData} 
-          handleSortClick={props.handleSortClick}
-        />
-      </table>
     </div>
   )
 }

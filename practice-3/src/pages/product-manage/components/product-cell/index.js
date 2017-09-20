@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import PropTypes from 'prop-types'
 
 import { Input } from 'pages/commons/Input'
 import { Button } from 'pages/commons/Button'
@@ -93,5 +94,21 @@ const ProductCell = props => {
     )
   }
 }
-//thieu
-export default ProductCell;
+
+ProductCell.propTypes = {
+  refElement: PropTypes.func,
+  cellAttributes: PropTypes.object,
+  cellData: PropTypes.object,
+  cellActions: PropTypes.object,
+  value: PropTypes.string
+}
+
+ProductCell.defaultProps = {
+  refElement: null,
+  cellAttributes: null,
+  cellData: null,
+  cellActions: null,
+  value: ''
+}
+
+export default ProductCell

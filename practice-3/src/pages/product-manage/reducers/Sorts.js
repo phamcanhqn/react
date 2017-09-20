@@ -1,6 +1,6 @@
 import {
   SORT_PRODUCT_LIST
-} from '../pages/product-manage/actions'
+} from 'pages/actions'
 
 const sortData = (state = {}, action) => {
   switch (action.type) {

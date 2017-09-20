@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Input } from 'pages/commons/input/'
-import { Button } from 'pages/commons/button/'
-import { DropdownSelect } from 'pages/commons/dropdown-select/'
+import { Input } from 'pages/commons/Input'
+import { Button } from 'pages/commons/Button'
+import { DropdownSelect } from 'pages/commons/DropdownSelect'
 import { ProductHelpers } from 'helpers/Products'
 
 import './styles/ProductCell.css';
@@ -93,5 +93,5 @@ const ProductCell = props => {
     )
   }
 }
-
+//thieu
 export default ProductCell;

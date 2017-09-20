@@ -5,7 +5,7 @@ import {
   editProduct,
   cancelProduct,
   deleteProduct
-} from '../actions'
+} from 'pages/actions'
 
 const mapDispatchToProps = dispatch => ({
   handleSaveAction: product => {

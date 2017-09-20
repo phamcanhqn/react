@@ -1,4 +1,4 @@
-import { ProductHelpers } from '../helpers/Products'
+import { ProductHelpers } from 'helpers/Products'
 
 import {
   ADD_PRODUCT,
@@ -8,7 +8,7 @@ import {
   EDIT_PRODUCT,
   DELETE_PRODUCT,
   SORT_PRODUCT_LIST
-} from '../pages/product-manage/actions'
+} from 'pages/actions'
 
 const products = (state = [], action) => {
   let originalProducts = ProductHelpers.loadProductList()

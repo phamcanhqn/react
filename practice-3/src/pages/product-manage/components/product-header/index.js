@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { SortIcon } from 'pages/commons/sort-icon'
+import { SortIcon } from 'pages/commons/SortIcon'
 import { ProductHelpers } from 'helpers/Products'
 
 import './styles/ProductHeader.css'
@@ -56,7 +56,7 @@ const ProductHeader = props => {
               >
                 <span className="header-title">
                   {col.display}
-                  <SortIcon className={`sort-icon ${props.sortBy === col.name ? props.sortType : ""}`} />
+                  <SortIcon className={`sort-icon ${props.sortData.sortBy === col.name ? props.sortData.sortType : ""}`} />
                 </span>
               </th>
             )

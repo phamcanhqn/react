@@ -1,7 +1,7 @@
 import { createStore } from 'redux'
 
-import ProductApp from '../reducers'
-import { ProductHelpers } from '../helpers/Products'
+import ProductApp from 'pages/product-manage/reducers'
+import { ProductHelpers } from 'helpers/Products'
 
 const INITIAL_STATE = {
   products: ProductHelpers.loadProductList(),

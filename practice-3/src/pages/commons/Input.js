@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './style/Input.css';
+import './styles/Input.css';
 
 const Input = props => {
   /**

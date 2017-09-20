@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import './style/DropdownSelect.css'
+import './styles/DropdownSelect.css'
 
 const DropdownSelect = props => {
   /**

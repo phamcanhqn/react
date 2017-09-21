@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 
 import ProductRow from 'pages/product-manage/containers/ProductItem'
 import ProductHeader from 'pages/product-manage/components/product-header'
-
+import Perf from 'react-addons-perf'; // ES6
 import './styles/ProductList.css'
-
+Perf.start()
 const ProductList = props => {
   return (
     <table className="products-table">
@@ -30,6 +30,10 @@ const ProductList = props => {
     </table>
   )
 }
+
+Perf.stop()
+Perf.getLastMeasurements()
+Perf.printInclusive(Perf.getLastMeasurements())
 
 ProductList.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object)

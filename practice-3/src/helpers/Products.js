@@ -46,7 +46,7 @@ const ProductHelpers = {
   addNewProduct: (productList, newProduct) => {
     newProduct.id = new Date().valueOf()
     productList.push(newProduct)
-
+    
     return productList
   },
 
@@ -54,8 +54,11 @@ const ProductHelpers = {
     const index = _.findIndex(productList, productItem => {
       return product.id === productItem.id
     })
-  
-    productList.splice(index, 1, product)
+    if (index === -1) {
+      productList.push(product)
+    } else {
+      productList.splice(index, 1, product)
+    }
 
     //update new data for product list
     if (!product.isEditMode) {

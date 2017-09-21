@@ -26,7 +26,7 @@ const ProductApp = (props) => {
         className="btn-add"
         handleClick={handleAddProductAction}
         label="Add New Product"
-      />>
+      />
       <ProductList 
         products={props.products} 
         sortData={props.sortData} 

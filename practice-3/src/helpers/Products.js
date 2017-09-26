@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from 'lodash'
 
 import {
   Columns,
@@ -7,7 +7,14 @@ import {
   CategoriesData,
   EmptyProduct,
   updateProductData
-} from './../constants/DataObjects';
+} from 'constants/DataObjects';
+ 
+import {
+  filterCollection,
+  sortCollection,
+  findDataByIdCollection,
+  findIndexByIdCollection
+} from './Utility'
 
 const ProductHelpers = {
   // Create an empty product
@@ -32,21 +39,17 @@ const ProductHelpers = {
   },
 
   findProductById: (id, productList) => {
-    return _.find(productList, product => {
-      return product.id === id
-    })
+    return findDataByIdCollection(id, productList)
   },
 
   findIndexProductById: (id, productList) => {
-    return _.findIndex(productList, product => {
-      return product.id === id
-    })
+    return findIndexByIdCollection(id, productList)
   },
 
   addNewProduct: (productList, newProduct) => {
     newProduct.id = new Date().valueOf()
     productList.push(newProduct)
-
+    
     return productList
   },
 
@@ -54,8 +57,11 @@ const ProductHelpers = {
     const index = _.findIndex(productList, productItem => {
       return product.id === productItem.id
     })
-  
-    productList.splice(index, 1, product)
+    if (index === -1) {
+      productList.push(product)
+    } else {
+      productList.splice(index, 1, product)
+    }
 
     //update new data for product list
     if (!product.isEditMode) {
@@ -77,37 +83,11 @@ const ProductHelpers = {
   },
 
   filterProducts: (filterData, productList) => {
-    _.forOwn(filterData, (value, key) => {
-      if (value) {
-        productList = _.filter(productList, product=> {
-          return product[key].toString().indexOf(value) !== -1;
-        })
-      }
-    })
-
-    return productList
+    return filterCollection(filterData, productList)
   },
 
   sortProductList: ({ sortBy, sortType }, productList) => {
-    let productsSorted = _.sortBy(productList, product => {
-      return product[sortBy]
-    })
-
-    return sortType === 'asc-sort' ? productsSorted : productsSorted.reverse()
-  },
-
-  updateDataObject: (newValue, fieldName, curObject) => {
-    if (newValue) {
-      curObject[fieldName] = newValue
-    } else {
-      curObject = _.omit(curObject, fieldName)
-    }
-
-    return curObject
-  },
-
-  compareObject: (firstObject, secondObject) => {
-    return _.isEqual(firstObject, secondObject);
+    return sortCollection({ sortBy, sortType }, productList)
   }
 }
 

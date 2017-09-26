@@ -69,14 +69,12 @@ const ProductHeader = props => {
 
 ProductHeader.propTypes = {
   handleSortClick: PropTypes.func,
-  sortType: PropTypes.string,
-  sortBy: PropTypes.string
+  sortData: PropTypes.object
 }
 
 ProductHeader.defaultProps = {
   handleSortClick: null,
-  sortType: '',
-  sortBy: ''
+  sortData: ''
 }
 
 export default ProductHeader

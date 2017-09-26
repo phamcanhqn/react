@@ -27,14 +27,11 @@ const ProductApp = (props) => {
         handleClick={handleAddProductAction}
         label="Add New Product"
       />
-
-      <table className="products-table">
-        <ProductList 
-          products={props.products} 
-          sortData={props.sortData} 
-          handleSortClick={props.handleSortClick}
-        />
-      </table>
+      <ProductList 
+        products={props.products} 
+        sortData={props.sortData} 
+        handleSortClick={props.handleSortClick}
+      />
     </div>
   )
 }

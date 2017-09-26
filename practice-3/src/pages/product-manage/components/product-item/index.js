@@ -8,7 +8,7 @@ import './styles/ProductItem.css'
 
 import { visualizeRender } from 'react-global-render-visualizer'
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === 'development') {
   React.Component = visualizeRender()(React.Component);
   React.PureComponent = visualizeRender()(React.PureComponent);
 }

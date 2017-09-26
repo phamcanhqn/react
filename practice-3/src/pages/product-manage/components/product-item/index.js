@@ -8,6 +8,8 @@ import './styles/ProductItem.css'
 
 import { visualizeRender } from 'react-global-render-visualizer'
 
+import Perf from 'react-addons-perf'; // ES6
+
 if (process.env.NODE_ENV === 'development') {
   React.Component = visualizeRender()(React.Component);
   React.PureComponent = visualizeRender()(React.PureComponent);
@@ -47,7 +49,22 @@ class ProductItem extends React.Component {
         break
     }
   }
+  
+  shouldComponentUpdate(nextProps) {
+    if (this.props.product !== nextProps.product) {
+      Perf.start()
+      return true
+    }
+    return false
+  }
 
+  componentDidUpdate() {
+    Perf.stop()
+    // Perf.getLastMeasurements()
+    Perf.printExclusive(Perf.getLastMeasurements())
+    //Perf.printInclusive()
+    Perf.printWasted()
+  }
   /**
    * Collect data input on product row
    * @return {Object} product data 

@@ -4,6 +4,7 @@ import TodoApp from './components/App'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
+import Root from './components/Root'
 import './App.css';
 
 const store = createStore(reducer)
@@ -16,10 +17,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>
-        <Provider store={store}>
-          <TodoApp />
-        </Provider>
-
+        <Root store={store} />
       </div>
     );
   }

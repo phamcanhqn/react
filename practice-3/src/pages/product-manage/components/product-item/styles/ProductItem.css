@@ -1,0 +1,17 @@
+.btn-edit,
+.btn-save{
+  margin-right: 5px;
+  background-color: #d1dcad;
+}
+
+.btn-delete {
+  background-color: #716a6b;
+}
+
+.product-item td {
+  padding: 10px 5px;
+}
+
+.product-item:nth-child(2n) {
+  background-color: #d3d6d4;
+}

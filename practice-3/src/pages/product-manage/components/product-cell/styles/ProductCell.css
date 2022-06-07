@@ -1,0 +1,27 @@
+.action-column button {
+  display: none;
+}
+
+.action-column {
+  display: flex;
+  justify-content: space-around;
+}
+.action-column .btn-save, .btn-cancel {
+  display: none;
+}
+
+.action-column .btn-edit,
+.action-column .btn-delete {
+  display: block;
+}
+
+.action-column.edit-mode .btn-save,
+.action-column.edit-mode .btn-cancel {
+  display: block;
+}
+
+.action-column.edit-mode .btn-edit,
+.action-column.edit-mode .btn-delete {
+  display: none;
+}
+

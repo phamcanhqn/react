@@ -1,0 +1,9 @@
+th {
+  background-color: gray;
+}
+
+.header-title {
+	display: flex;
+  position: relative;
+  padding: 10px;
+}

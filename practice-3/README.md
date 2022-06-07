@@ -17,7 +17,7 @@
 * User can CRUD a product on list
 * Validate data input
 
-## Run Practice
+## Run Practice 
 
 mkdir react-redux-practice-3
 

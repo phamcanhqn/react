@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ProductAppManage from 'pages/product-manage/containers/ProductApp'
 
 import { Provider } from 'react-redux'
-import store from 'store/configureStore'
+import store from './store/configureStore'
 
 class App extends Component {
   render() {
